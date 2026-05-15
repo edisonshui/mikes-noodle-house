@@ -2,13 +2,9 @@ node_modules/
 temporary screenshots/
 versions/
 .DS_Store
-*.png
-*.jpg
-*.jpeg
 *.heic
 *.HEIC
 *.MOV
 *.mov
 *.mp4
-*.webp
 *.docx
