@@ -1,0 +1,1341 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us · 關於我們 — 全記麵家 Mike's Noodle House</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --paper:       #F5EACC;
+      --paper-alt:   #EDE0B5;
+      --paper-warm:  #E8D4A0;
+      --red:         #C12518;
+      --red-dk:      #8C1610;
+      --red-mid:     #A41E14;
+      --ink:         #1C0E07;
+      --ink-mid:     #4E2E18;
+      --ink-lt:      #7A5030;
+      --gold:        #B88228;
+      --gold-lt:     #CFA040;
+      --cream:       #FDF4E4;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Noto Sans SC', 'PingFang HK', system-ui, sans-serif;
+      background-color: var(--paper);
+      color: var(--ink);
+      overflow-x: hidden;
+      line-height: 1.7;
+    }
+
+    /* Paper grain overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.90' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.9'/%3E%3C/svg%3E");
+      background-size: 200px 200px;
+      opacity: 0.038;
+      pointer-events: none;
+      z-index: 9999;
+      mix-blend-mode: multiply;
+    }
+
+    section, nav, footer, .above { position: relative; z-index: 1; }
+
+    /* ── NAVIGATION ── */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: var(--paper);
+      border-bottom: 1px solid var(--ink-lt);
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+    }
+
+    .nav::after {
+      content: '';
+      position: absolute;
+      bottom: -3px; left: 0; right: 0;
+      height: 2px;
+      background: var(--red);
+    }
+
+    .nav-side { display: flex; align-items: center; gap: 30px; }
+
+    .nav-link {
+      font-size: 13px;
+      color: var(--ink-mid);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      transition: color 0.2s ease;
+    }
+
+    .nav-link:hover { color: var(--red); }
+    .nav-link:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
+    .nav-link.active { color: var(--red); }
+
+    .nav-logo img {
+      height: 34px;
+      width: auto;
+      display: block;
+    }
+
+    /* ── PAGE HERO ── */
+    .page-hero {
+      padding-top: 52px;
+      min-height: 52vh;
+      background: var(--red-dk);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Grid texture on red */
+    .page-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48'%3E%3Crect width='48' height='48' fill='none' stroke='rgba(255,235,185,0.055)' stroke-width='0.8'/%3E%3C/svg%3E");
+      background-size: 48px 48px;
+    }
+
+    .page-hero-left {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 80px 64px 80px 80px;
+    }
+
+    /* Inner frame on left */
+    .page-hero-frame {
+      position: absolute;
+      top: 24px; left: 24px; right: 0; bottom: 24px;
+      border: 1px solid rgba(255,235,180,0.12);
+      pointer-events: none;
+    }
+
+    .page-hero-frame::before {
+      content: '';
+      position: absolute;
+      top: 6px; left: 6px; right: 6px; bottom: 6px;
+      border: 1px solid rgba(255,235,180,0.06);
+    }
+
+    /* Corner ornaments */
+    .hero-corner {
+      position: absolute;
+      width: 28px;
+      height: 28px;
+    }
+
+    .hero-corner svg { display: block; }
+    .hero-corner--tl { top: 36px; left: 36px; }
+    .hero-corner--bl { bottom: 36px; left: 36px; transform: scaleY(-1); }
+
+    .page-hero-eyebrow {
+      font-size: 10px;
+      letter-spacing: 0.65em;
+      color: rgba(247,235,200,0.55);
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .page-hero-title-cn {
+      font-family: 'Noto Serif SC', serif;
+      font-weight: 900;
+      font-size: clamp(52px, 7vw, 88px);
+      color: #F7EBC8;
+      line-height: 1.0;
+      letter-spacing: 0.04em;
+      text-shadow: 3px 3px 18px rgba(0,0,0,0.4);
+      position: relative;
+      z-index: 2;
+      writing-mode: vertical-rl;
+      text-orientation: upright;
+    }
+
+    .page-hero-title-en {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(28px, 3.6vw, 46px);
+      font-weight: 300;
+      color: rgba(247,235,200,0.72);
+      font-style: italic;
+      letter-spacing: 0.02em;
+      line-height: 1.3;
+      position: relative;
+      z-index: 2;
+      margin-top: 20px;
+    }
+
+    .page-hero-right {
+      position: relative;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    .page-hero-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: sepia(30%) contrast(1.05) brightness(0.72);
+      mix-blend-mode: multiply;
+    }
+
+    .page-hero-right::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, var(--red-dk) 0%, transparent 30%),
+                  linear-gradient(to top, rgba(28,14,7,0.6) 0%, transparent 50%);
+    }
+
+    /* ── BREADCRUMB BANNER ── */
+    .trad-banner {
+      background: var(--red);
+      padding: 10px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+    }
+
+    .trad-banner-text {
+      font-size: 11px;
+      color: rgba(247,235,200,0.85);
+      letter-spacing: 0.55em;
+      text-transform: uppercase;
+    }
+
+    .trad-banner-dot {
+      width: 4px;
+      height: 4px;
+      background: rgba(247,235,200,0.4);
+      border-radius: 50%;
+    }
+
+    /* ── GOLD RULE ── */
+    .gold-rule {
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold-lt), transparent);
+    }
+
+    /* ── SHARED SECTION TOKENS ── */
+    .section-eyebrow {
+      display: block;
+      font-size: 11px;
+      letter-spacing: 0.5em;
+      color: var(--red);
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .section-h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(28px, 3.8vw, 46px);
+      font-weight: 600;
+      color: var(--ink);
+      line-height: 1.2;
+      margin-bottom: 6px;
+    }
+
+    .section-h2-zh {
+      font-family: 'Noto Serif SC', serif;
+      font-size: clamp(16px, 2vw, 22px);
+      font-weight: 700;
+      color: var(--ink-mid);
+      margin-bottom: 28px;
+      display: block;
+      letter-spacing: 0.04em;
+    }
+
+    .section-body {
+      font-size: 14.5px;
+      color: var(--ink-mid);
+      line-height: 2.0;
+      margin-bottom: 14px;
+    }
+
+    .section-body-zh {
+      font-family: 'Noto Serif SC', serif;
+      font-size: 13px;
+      color: var(--ink-lt);
+      line-height: 1.95;
+      margin-top: 4px;
+      margin-bottom: 22px;
+      padding-left: 14px;
+      border-left: 2px solid rgba(193,37,24,0.22);
+    }
+
+    .red-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 10px;
+      color: var(--red);
+      font-size: 10.5px;
+      letter-spacing: 0.42em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 10px 24px;
+      border: 1px solid rgba(193,37,24,0.4);
+      transition: background 0.22s ease, border-color 0.22s ease;
+      font-weight: 400;
+    }
+
+    .red-btn:hover { background: rgba(193,37,24,0.06); border-color: var(--red); }
+    .red-btn:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
+    .red-btn:active { transform: scale(0.98); }
+
+    /* ── FOUNDER SECTION ── */
+    .founder-section {
+      padding: 100px 80px;
+      max-width: 1440px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 420px 1fr;
+      gap: 88px;
+      align-items: center;
+    }
+
+    .founder-visual {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+
+    .founder-frame {
+      width: 340px;
+      height: 440px;
+      position: relative;
+    }
+
+    .founder-frame::before {
+      content: '';
+      position: absolute;
+      top: -12px; left: -12px; right: -12px; bottom: -12px;
+      border: 1px solid rgba(180,130,40,0.28);
+    }
+
+    .founder-frame::after {
+      content: '';
+      position: absolute;
+      top: -6px; left: -6px; right: -6px; bottom: -6px;
+      border: 1px solid rgba(180,130,40,0.48);
+    }
+
+    .founder-photo {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .founder-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: sepia(22%) contrast(1.06) brightness(0.87);
+    }
+
+    .founder-photo::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, transparent 45%, rgba(28,14,7,0.55));
+    }
+
+    /* Red circular seal */
+    .founder-seal {
+      position: absolute;
+      bottom: -38px;
+      right: -32px;
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      background: var(--red);
+      border: 3px solid var(--cream);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 3;
+      box-shadow: 0 4px 20px rgba(28,14,7,0.28);
+    }
+
+    .founder-seal-zh {
+      font-family: 'Noto Serif SC', serif;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--cream);
+      letter-spacing: 0.04em;
+      text-align: center;
+      line-height: 1.3;
+    }
+
+    .founder-seal-en {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 8px;
+      color: rgba(253,244,228,0.65);
+      letter-spacing: 0.18em;
+      margin-top: 2px;
+      text-transform: uppercase;
+    }
+
+    .founder-caption {
+      margin-top: 54px;
+      font-family: 'Noto Serif SC', serif;
+      font-size: 12px;
+      color: var(--ink-lt);
+      text-align: center;
+      letter-spacing: 0.12em;
+    }
+
+    /* ── RULED DIVIDER ── */
+    .ruled-divider {
+      position: relative;
+      padding: 28px 0;
+      text-align: center;
+    }
+
+    .ruled-divider::before, .ruled-divider::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      width: calc(50% - 72px);
+      height: 1px;
+      background: linear-gradient(to var(--dir, right), var(--paper-warm), transparent);
+    }
+
+    .ruled-divider::before { left: 0; --dir: right; }
+    .ruled-divider::after  { right: 0; --dir: left; }
+
+    .ruled-divider-inner {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--gold);
+      font-size: 12px;
+      letter-spacing: 0.35em;
+    }
+
+    .ruled-dot {
+      width: 4px;
+      height: 4px;
+      background: var(--red);
+      transform: rotate(45deg);
+    }
+
+    /* ── CRAFT SECTION ── */
+    .craft-section {
+      background: var(--paper-alt);
+      border-top: 3px solid var(--red);
+      border-bottom: 3px solid var(--red);
+      padding: 80px;
+      position: relative;
+    }
+
+    .craft-section::before {
+      content: '';
+      position: absolute;
+      top: 7px; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold-lt), transparent);
+    }
+
+    .craft-section::after {
+      content: '';
+      position: absolute;
+      bottom: 7px; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold-lt), transparent);
+    }
+
+    .craft-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    .craft-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    .craft-item {
+      background: var(--paper);
+      padding: 44px 36px;
+      position: relative;
+      border: 1px solid rgba(180,130,40,0.14);
+    }
+
+    .craft-item::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--red);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    .craft-item:hover::before { transform: scaleX(1); }
+
+    .craft-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 48px;
+      font-weight: 300;
+      color: rgba(193,37,24,0.14);
+      line-height: 1;
+      margin-bottom: 14px;
+      letter-spacing: -0.02em;
+    }
+
+    .craft-title-zh {
+      font-family: 'Noto Serif SC', serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--ink);
+      letter-spacing: 0.06em;
+      margin-bottom: 6px;
+    }
+
+    .craft-title-en {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 13px;
+      font-style: italic;
+      color: var(--ink-lt);
+      letter-spacing: 0.04em;
+      margin-bottom: 18px;
+    }
+
+    .craft-body {
+      font-size: 13.5px;
+      color: var(--ink-mid);
+      line-height: 1.95;
+    }
+
+    /* ── TIMELINE ── */
+    .timeline-section {
+      padding: 100px 80px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .timeline-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    .timeline {
+      position: relative;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      top: 0; bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 1px;
+      background: linear-gradient(to bottom, transparent, var(--gold-lt) 10%, var(--gold-lt) 90%, transparent);
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 1fr 60px 1fr;
+      align-items: start;
+      gap: 0;
+      margin-bottom: 52px;
+    }
+
+    .timeline-item:last-child { margin-bottom: 0; }
+
+    .timeline-left {
+      padding-right: 36px;
+      text-align: right;
+    }
+
+    .timeline-right {
+      padding-left: 36px;
+    }
+
+    .timeline-year {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .timeline-year-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--cream);
+      background: var(--red);
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      letter-spacing: 0.02em;
+      position: relative;
+      z-index: 1;
+      box-shadow: 0 0 0 5px rgba(193,37,24,0.12);
+    }
+
+    .timeline-item:nth-child(even) .timeline-left { order: 1; }
+    .timeline-item:nth-child(even) .timeline-year { order: 2; }
+    .timeline-item:nth-child(even) .timeline-right { order: 3; }
+    .timeline-item:nth-child(even) .timeline-left { text-align: right; padding-right: 36px; padding-left: 0; }
+    .timeline-item:nth-child(even) .timeline-right { padding-left: 36px; }
+
+    .timeline-head {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 6px;
+      line-height: 1.4;
+    }
+
+    .timeline-head-zh {
+      font-family: 'Noto Serif SC', serif;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--red);
+      letter-spacing: 0.06em;
+      margin-bottom: 8px;
+    }
+
+    .timeline-body {
+      font-size: 13px;
+      color: var(--ink-lt);
+      line-height: 1.85;
+    }
+
+    /* ── PHILOSOPHY SECTION ── */
+    .philosophy-section {
+      background: var(--ink);
+      padding: 100px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .philosophy-section::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--red);
+    }
+
+    .philosophy-section::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--red);
+    }
+
+    /* Faint traditional pattern */
+    .philosophy-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Crect width='80' height='80' fill='none' stroke='rgba(245,234,204,0.03)' stroke-width='0.8'/%3E%3Ccircle cx='40' cy='40' r='25' fill='none' stroke='rgba(245,234,204,0.02)' stroke-width='0.8'/%3E%3C/svg%3E");
+      background-size: 80px 80px;
+    }
+
+    .philosophy-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 780px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .philosophy-quote-zh {
+      font-family: 'Noto Serif SC', serif;
+      font-size: clamp(28px, 4vw, 52px);
+      font-weight: 700;
+      color: #F7EBC8;
+      letter-spacing: 0.08em;
+      line-height: 1.6;
+      margin-bottom: 32px;
+    }
+
+    .philosophy-quote-en {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(18px, 2.2vw, 26px);
+      font-style: italic;
+      font-weight: 300;
+      color: rgba(247,235,200,0.58);
+      line-height: 1.8;
+      margin-bottom: 40px;
+      letter-spacing: 0.02em;
+    }
+
+    .philosophy-rule {
+      width: 80px;
+      height: 1px;
+      background: var(--gold);
+      margin: 0 auto 28px;
+    }
+
+    .philosophy-attr {
+      font-size: 11px;
+      letter-spacing: 0.5em;
+      color: rgba(247,235,200,0.32);
+      text-transform: uppercase;
+    }
+
+    /* ── TEAM / VALUES STRIP ── */
+    .values-section {
+      padding: 80px;
+      background: var(--paper-alt);
+      border-top: 1px solid rgba(180,130,40,0.18);
+    }
+
+    .values-header {
+      text-align: center;
+      margin-bottom: 52px;
+    }
+
+    .values-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    .value-item {
+      background: var(--paper);
+      padding: 40px 28px;
+      text-align: center;
+      border: 1px solid rgba(180,130,40,0.12);
+      transition: background 0.25s ease;
+    }
+
+    .value-item:hover { background: var(--cream); }
+
+    .value-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: var(--red);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 18px;
+    }
+
+    .value-icon-zh {
+      font-family: 'Noto Serif SC', serif;
+      font-size: 18px;
+      font-weight: 900;
+      color: var(--cream);
+    }
+
+    .value-title-zh {
+      font-family: 'Noto Serif SC', serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--ink);
+      letter-spacing: 0.06em;
+      margin-bottom: 6px;
+    }
+
+    .value-title-en {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 12px;
+      font-style: italic;
+      color: var(--ink-lt);
+      margin-bottom: 14px;
+    }
+
+    .value-body {
+      font-size: 13px;
+      color: var(--ink-mid);
+      line-height: 1.9;
+    }
+
+    /* ── FOOTER ── */
+    .footer {
+      background: var(--ink);
+      border-top: 3px solid var(--red);
+      padding: 64px 80px 36px;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 80px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid rgba(253,244,228,0.07);
+    }
+
+    .footer-brand {}
+
+    .footer-logo {
+      background: #fff;
+      padding: 8px 12px;
+      display: inline-block;
+      margin-bottom: 20px;
+    }
+
+    .footer-logo img { height: 38px; width: auto; display: block; }
+
+    .footer-brand-text {
+      font-size: 12px;
+      color: rgba(253,244,228,0.38);
+      line-height: 1.9;
+      letter-spacing: 0.04em;
+    }
+
+    .footer-nav-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
+    }
+
+    .footer-col-head {
+      font-size: 10px;
+      letter-spacing: 0.42em;
+      color: var(--red);
+      text-transform: uppercase;
+      margin-bottom: 18px;
+      font-weight: 400;
+    }
+
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+
+    .footer-link {
+      font-size: 13px;
+      color: rgba(253,244,228,0.38);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      transition: color 0.2s ease;
+    }
+
+    .footer-link:hover { color: rgba(253,244,228,0.8); }
+
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 32px;
+    }
+
+    .footer-copy {
+      font-size: 11px;
+      color: rgba(253,244,228,0.2);
+      letter-spacing: 0.06em;
+    }
+
+    .socials { display: flex; gap: 14px; }
+
+    .social-btn {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: 1px solid rgba(253,244,228,0.16);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(253,244,228,0.38);
+      text-decoration: none;
+      font-size: 13px;
+      transition: border-color 0.2s ease, color 0.2s ease;
+    }
+
+    .social-btn:hover { border-color: var(--red); color: var(--red); }
+    .social-btn:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
+  </style>
+</head>
+<body>
+
+<!-- ── NAVIGATION ── -->
+<nav class="nav">
+  <div class="nav-side">
+    <a href="about.html" class="nav-link active">關於我們 · About</a>
+    <a href="index.html#menu" class="nav-link">菜單 · Menu</a>
+    <a href="index.html#story" class="nav-link">我們的故事 · Story</a>
+  </div>
+  <div class="nav-logo">
+    <a href="index.html">
+      <img src="brand_assets/mikes-noodle-house-logo.png" alt="全記麵家 Mike's Noodle House">
+    </a>
+  </div>
+  <div class="nav-side">
+    <a href="index.html#location" class="nav-link">地點 · Location</a>
+    <a href="tel:+12063897099" class="nav-link">(206) 389-7099</a>
+  </div>
+</nav>
+
+<!-- ── PAGE HERO ── -->
+<section class="page-hero">
+
+  <div class="page-hero-left">
+    <div class="page-hero-frame"></div>
+
+    <div class="hero-corner hero-corner--tl">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+        <path d="M2 26 L2 2 L26 2" stroke="rgba(247,235,200,0.35)" stroke-width="1.5"/>
+        <path d="M6 22 L6 6 L22 6" stroke="rgba(247,235,200,0.16)" stroke-width="0.8"/>
+        <circle cx="2" cy="2" r="2" fill="rgba(247,235,200,0.4)"/>
+      </svg>
+    </div>
+    <div class="hero-corner hero-corner--bl">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+        <path d="M2 26 L2 2 L26 2" stroke="rgba(247,235,200,0.35)" stroke-width="1.5"/>
+        <path d="M6 22 L6 6 L22 6" stroke="rgba(247,235,200,0.16)" stroke-width="0.8"/>
+        <circle cx="2" cy="2" r="2" fill="rgba(247,235,200,0.4)"/>
+      </svg>
+    </div>
+
+    <p class="page-hero-eyebrow">關於我們 · About Us</p>
+    <div style="display:flex; gap:20px; align-items:flex-end; position:relative; z-index:2;">
+      <h1 class="page-hero-title-cn">全記</h1>
+      <p class="page-hero-title-en">
+        Four decades of<br>
+        the same honest bowl.
+      </p>
+    </div>
+  </div>
+
+  <div class="page-hero-right">
+    <img class="page-hero-img" src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=800&h=600&fit=crop&auto=format&q=80" alt="Restaurant interior">
+  </div>
+</section>
+
+<!-- ── BANNER ── -->
+<div class="trad-banner">
+  <span class="trad-banner-text">現金交易 · Cash Only</span>
+  <div class="trad-banner-dot"></div>
+  <span class="trad-banner-text">無需訂位 · Walk-ins Welcome</span>
+  <div class="trad-banner-dot"></div>
+  <span class="trad-banner-text">Est. 1986 · Seattle, WA</span>
+  <div class="trad-banner-dot"></div>
+  <span class="trad-banner-text">粥麵專家 · Noodle Masters</span>
+</div>
+
+<div class="gold-rule"></div>
+
+<!-- ── FOUNDER ── -->
+<section class="founder-section" id="founder">
+
+  <div class="founder-visual">
+    <div class="founder-frame">
+      <div class="founder-photo">
+        <img src="https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?w=340&h=440&fit=crop&auto=format&q=80" alt="Mike — Founder">
+      </div>
+      <div class="founder-seal">
+        <span class="founder-seal-zh">創辦人<br>Mike</span>
+        <span class="founder-seal-en">Founder</span>
+      </div>
+    </div>
+    <p class="founder-caption">全記麵家 · Mike Yung · 1986</p>
+  </div>
+
+  <div>
+    <span class="section-eyebrow">The Founder · 創辦人</span>
+    <h2 class="section-h2">From Hong Kong<br>to Seattle's Heart</h2>
+    <span class="section-h2-zh">從香港到西雅圖唐人街</span>
+
+    <p class="section-body">
+      Mike arrived in Seattle in the early 1980s carrying one thing above all else: a deep love for Hong Kong's noodle-house culture — the steaming broth, the perfectly folded wontons, the clatter of bowls at six in the morning. He had watched his grandmother cook this way, and her mother before her.
+    </p>
+    <p class="section-body-zh">
+      Mike於八十年代初抵達西雅圖，心中懷抱著對港式麵家文化的深厚情感——滾燙的湯底、手工包裹的雲吞、清晨六點碗碟碰撞的聲響。那是祖母的手藝，也是曾祖母的傳承。
+    </p>
+
+    <p class="section-body">
+      In 1986, he opened 全記麵家 on Maynard Avenue South, in the middle of Seattle's Chinatown-International District. There were no shortcuts. The broth was slow-simmered from pork bones for hours. The egg noodles were handmade each morning. The wontons were folded by hand, just as they had always been.
+    </p>
+    <p class="section-body-zh">
+      1986年，他在西雅圖唐人街美納德大道南開設全記麵家。湯底以豬骨熬煮數小時，蛋麵每日手製，雲吞一個個親手包裹。一切如舊，從不簡化。
+    </p>
+
+    <a href="index.html" class="red-btn">回到主頁 · Back to Home →</a>
+  </div>
+</section>
+
+<div class="gold-rule"></div>
+
+<!-- ── CRAFT ── -->
+<section class="craft-section" id="craft">
+  <div class="craft-header">
+    <span class="section-eyebrow">Our Craft · 我們的工藝</span>
+    <h2 class="section-h2">The Art Behind Every Bowl</h2>
+    <span class="section-h2-zh" style="display:block;text-align:center;margin-top:4px;">每一碗背後的工藝</span>
+  </div>
+
+  <div class="craft-grid">
+    <div class="craft-item">
+      <div class="craft-num">一</div>
+      <div class="craft-title-zh">豬骨清湯</div>
+      <div class="craft-title-en">Pork Bone Broth</div>
+      <p class="craft-body">
+        Each morning begins with pork bones, ginger, and time. We simmer our broth for hours until it runs clear and carries a natural sweetness that no shortcut can replicate. The broth is the soul of every bowl.
+      </p>
+    </div>
+
+    <div class="craft-item">
+      <div class="craft-num">二</div>
+      <div class="craft-title-zh">手製雲吞</div>
+      <div class="craft-title-en">Hand-Folded Wontons</div>
+      <p class="craft-body">
+        Our wontons are folded by hand every day — paper-thin wrappers filled with fresh pork and shrimp, sealed with a single practiced fold. Each one is made to order, never pre-made, never frozen.
+      </p>
+    </div>
+
+    <div class="craft-item">
+      <div class="craft-num">三</div>
+      <div class="craft-title-zh">新鮮蛋麵</div>
+      <div class="craft-title-en">Fresh Egg Noodles</div>
+      <p class="craft-body">
+        The noodles arrive fresh each morning — thin, springy, with just the right bite. They are blanched to order and served immediately, so every strand carries the broth without going soft.
+      </p>
+    </div>
+  </div>
+</section>
+
+<div class="gold-rule"></div>
+
+<!-- ── PHILOSOPHY QUOTE ── -->
+<section class="philosophy-section" id="philosophy">
+  <div class="philosophy-bg"></div>
+  <div class="philosophy-inner">
+    <p class="philosophy-quote-zh">食物不欺人</p>
+    <p class="philosophy-quote-en">
+      "Food does not lie.<br>
+      If the craft is honest, the bowl will speak for itself."
+    </p>
+    <div class="philosophy-rule"></div>
+    <p class="philosophy-attr">全記麵家 · Mike Yung · Est. 1986</p>
+  </div>
+</section>
+
+<!-- ── TIMELINE ── -->
+<section class="timeline-section" id="history">
+  <div class="timeline-header">
+    <span class="section-eyebrow">Our History · 全記歷史</span>
+    <h2 class="section-h2">Four Decades, One Promise</h2>
+    <span class="section-h2-zh">四十年，一個承諾</span>
+  </div>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-left">
+        <div class="timeline-head-zh">創業開幕</div>
+        <div class="timeline-head">Mike opens 全記麵家 on Maynard Ave S in Seattle's Chinatown</div>
+        <p class="timeline-body">A humble noodle house serving the Hong Kong immigrant community with the food they missed most.</p>
+      </div>
+      <div class="timeline-year">
+        <div class="timeline-year-num">1986</div>
+      </div>
+      <div class="timeline-right"></div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-left"></div>
+      <div class="timeline-year">
+        <div class="timeline-year-num">1995</div>
+      </div>
+      <div class="timeline-right">
+        <div class="timeline-head-zh">社區認可</div>
+        <div class="timeline-head">Recognised as a community anchor in Seattle's CID</div>
+        <p class="timeline-body">Featured in the Seattle Times as one of the neighborhood's most beloved institutions. Lines begin forming before opening.</p>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-left">
+        <div class="timeline-head-zh">傳承技藝</div>
+        <div class="timeline-head">Second generation joins the kitchen</div>
+        <p class="timeline-body">Mike's family steps in to continue the craft, learning every fold and every broth recipe by hand — no shortcuts allowed.</p>
+      </div>
+      <div class="timeline-year">
+        <div class="timeline-year-num">2008</div>
+      </div>
+      <div class="timeline-right"></div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-left"></div>
+      <div class="timeline-year">
+        <div class="timeline-year-num">2016</div>
+      </div>
+      <div class="timeline-right">
+        <div class="timeline-head-zh">三十週年</div>
+        <div class="timeline-head">30th anniversary — three decades of the same honest bowl</div>
+        <p class="timeline-body">A celebration marked not with fanfare, but with the same bowl of wonton noodle soup that started it all.</p>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-left">
+        <div class="timeline-head-zh">四十年如一日</div>
+        <div class="timeline-head">Today — still on Maynard Ave, still the same recipe</div>
+        <p class="timeline-body">Over four decades later, 全記麵家 continues with the same broth, the same wontons, and the same unwavering commitment to honest craft.</p>
+      </div>
+      <div class="timeline-year">
+        <div class="timeline-year-num">Now</div>
+      </div>
+      <div class="timeline-right"></div>
+    </div>
+  </div>
+</section>
+
+<div class="gold-rule"></div>
+
+<!-- ── VALUES ── -->
+<section class="values-section" id="values">
+  <div class="values-header">
+    <span class="section-eyebrow">What We Stand For · 我們的信念</span>
+    <h2 class="section-h2">The Four Pillars of 全記</h2>
+  </div>
+
+  <div class="values-row">
+    <div class="value-item">
+      <div class="value-icon">
+        <span class="value-icon-zh">誠</span>
+      </div>
+      <div class="value-title-zh">誠實</div>
+      <div class="value-title-en">Honesty</div>
+      <p class="value-body">No shortcuts, no imitations. Every ingredient is what we say it is, prepared the way it should be.</p>
+    </div>
+
+    <div class="value-item">
+      <div class="value-icon">
+        <span class="value-icon-zh">匠</span>
+      </div>
+      <div class="value-title-zh">工藝</div>
+      <div class="value-title-en">Craft</div>
+      <p class="value-body">Each wonton is folded by hand. Each broth is simmered from scratch. The craft is not optional — it is the product.</p>
+    </div>
+
+    <div class="value-item">
+      <div class="value-icon">
+        <span class="value-icon-zh">傳</span>
+      </div>
+      <div class="value-title-zh">傳承</div>
+      <div class="value-title-en">Heritage</div>
+      <p class="value-body">Our recipes are not invented — they are inherited. Hong Kong's great noodle tradition lives in every bowl we serve.</p>
+    </div>
+
+    <div class="value-item">
+      <div class="value-icon">
+        <span class="value-icon-zh">情</span>
+      </div>
+      <div class="value-title-zh">人情</div>
+      <div class="value-title-en">Community</div>
+      <p class="value-body">We have fed Seattle's Chinatown for forty years. Every bowl is a small act of belonging for the people who need it most.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer class="footer">
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="footer-logo">
+        <img src="brand_assets/mikes-noodle-house-logo.png" alt="全記麵家">
+      </div>
+      <p class="footer-brand-text">
+        全記麵家 · Mike's Noodle House<br>
+        粥麵專家 · Since 1986<br>
+        Seattle Chinatown-International District
+      </p>
+    </div>
+    <div class="footer-nav-grid">
+      <div>
+        <p class="footer-col-head">About Us</p>
+        <ul class="footer-links">
+          <li><a href="#founder" class="footer-link">Our Founder</a></li>
+          <li><a href="#craft" class="footer-link">Our Craft</a></li>
+          <li><a href="#history" class="footer-link">Our History</a></li>
+          <li><a href="#values" class="footer-link">Our Values</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-head">Menu</p>
+        <ul class="footer-links">
+          <li><a href="index.html#menu" class="footer-link">Wonton Noodle</a></li>
+          <li><a href="index.html#menu" class="footer-link">Rice Congee</a></li>
+          <li><a href="index.html#menu" class="footer-link">Sui-Kau Noodle</a></li>
+          <li><a href="index.html#menu" class="footer-link">Youtiao</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-head">Visit</p>
+        <ul class="footer-links">
+          <li><a href="index.html#location" class="footer-link">Directions</a></li>
+          <li><a href="index.html#news" class="footer-link">Latest News</a></li>
+          <li><a href="index.html#location" class="footer-link">Hours</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-head">Contact</p>
+        <ul class="footer-links">
+          <li><a href="tel:+12063897099" class="footer-link">(206) 389-7099</a></li>
+          <li><a href="#" class="footer-link">418 Maynard Ave S</a></li>
+          <li><a href="#" class="footer-link">Seattle, WA 98104</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2024 全記麵家 Mike's Noodle House. All rights reserved.</p>
+    <div class="socials">
+      <a href="#" class="social-btn" title="Facebook" aria-label="Facebook">f</a>
+      <a href="#" class="social-btn" title="Instagram" aria-label="Instagram">ig</a>
+      <a href="#" class="social-btn" title="Yelp" aria-label="Yelp">y</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ── GSAP + ScrollTrigger ── -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+(function () {
+  gsap.registerPlugin(ScrollTrigger);
+
+  /* ── PAGE HERO ── */
+  const heroTl = gsap.timeline({ delay: 0.2 });
+  heroTl
+    .from('.page-hero-eyebrow',    { opacity: 0, y: 14, duration: 0.65, ease: 'power2.out' })
+    .from('.page-hero-title-cn',   { opacity: 0, y: 40, duration: 1.0,  ease: 'power3.out' }, '-=0.3')
+    .from('.page-hero-title-en',   { opacity: 0, y: 24, duration: 0.8,  ease: 'power3.out' }, '-=0.5')
+    .from('.page-hero-right img',  { opacity: 0, scale: 1.04, duration: 1.1, ease: 'power2.out' }, 0.15);
+
+  /* ── BANNER ── */
+  gsap.from('.trad-banner-text, .trad-banner-dot', {
+    scrollTrigger: { trigger: '.trad-banner', start: 'top 90%' },
+    opacity: 0, stagger: 0.07, duration: 0.5, ease: 'power2.out'
+  });
+
+  /* ── FOUNDER ── */
+  gsap.from('.founder-visual', {
+    scrollTrigger: { trigger: '.founder-section', start: 'top 76%' },
+    opacity: 0, x: -50, duration: 1.0, ease: 'power3.out'
+  });
+  gsap.from('.founder-section > div:last-child > *', {
+    scrollTrigger: { trigger: '.founder-section', start: 'top 76%' },
+    opacity: 0, y: 28, stagger: 0.09, duration: 0.85, ease: 'power3.out', delay: 0.15
+  });
+
+  /* ── CRAFT ── */
+  gsap.from('.craft-header > *', {
+    scrollTrigger: { trigger: '.craft-section', start: 'top 80%' },
+    opacity: 0, y: 22, stagger: 0.1, duration: 0.75, ease: 'power3.out'
+  });
+  gsap.from('.craft-item', {
+    scrollTrigger: { trigger: '.craft-grid', start: 'top 82%' },
+    opacity: 0, y: 42, stagger: 0.14, duration: 0.9, ease: 'power3.out'
+  });
+
+  /* ── PHILOSOPHY ── */
+  gsap.from('.philosophy-inner > *', {
+    scrollTrigger: { trigger: '.philosophy-section', start: 'top 75%' },
+    opacity: 0, y: 30, stagger: 0.12, duration: 0.9, ease: 'power3.out'
+  });
+
+  /* ── TIMELINE ── */
+  gsap.from('.timeline-item', {
+    scrollTrigger: { trigger: '.timeline', start: 'top 80%' },
+    opacity: 0, y: 36, stagger: 0.15, duration: 0.85, ease: 'power3.out'
+  });
+
+  /* ── VALUES ── */
+  gsap.from('.values-header > *', {
+    scrollTrigger: { trigger: '.values-section', start: 'top 82%' },
+    opacity: 0, y: 20, stagger: 0.1, duration: 0.7, ease: 'power2.out'
+  });
+  gsap.from('.value-item', {
+    scrollTrigger: { trigger: '.values-row', start: 'top 84%' },
+    opacity: 0, y: 40, stagger: 0.12, duration: 0.85, ease: 'power3.out'
+  });
+})();
+</script>
+
+<!-- Motion micro-interactions -->
+<script type="module">
+import { animate, spring } from 'https://cdn.jsdelivr.net/npm/motion@10.18.2/+esm';
+
+/* Red buttons */
+document.querySelectorAll('.red-btn').forEach(btn => {
+  btn.addEventListener('mouseenter', () =>
+    animate(btn, { scale: 1.03, y: -3 }, { easing: spring({ stiffness: 420, damping: 18 }) })
+  );
+  btn.addEventListener('mouseleave', () =>
+    animate(btn, { scale: 1, y: 0 }, { easing: spring({ stiffness: 300, damping: 24 }) })
+  );
+});
+
+/* Social buttons */
+document.querySelectorAll('.social-btn').forEach(btn => {
+  btn.addEventListener('mouseenter', () =>
+    animate(btn, { scale: 1.15 }, { easing: spring({ stiffness: 500, damping: 20 }) })
+  );
+  btn.addEventListener('mouseleave', () =>
+    animate(btn, { scale: 1 }, { easing: spring({ stiffness: 400, damping: 22 }) })
+  );
+});
+
+/* Nav links */
+document.querySelectorAll('.nav-link').forEach(link => {
+  link.addEventListener('mouseenter', () =>
+    animate(link, { y: -2 }, { easing: spring({ stiffness: 500, damping: 20 }) })
+  );
+  link.addEventListener('mouseleave', () =>
+    animate(link, { y: 0 }, { easing: spring({ stiffness: 400, damping: 22 }) })
+  );
+});
+
+/* Founder portrait gentle scale */
+const founderFrame = document.querySelector('.founder-frame');
+if (founderFrame) {
+  founderFrame.addEventListener('mouseenter', () =>
+    animate(founderFrame, { scale: 1.02 }, { easing: spring({ stiffness: 280, damping: 22 }) })
+  );
+  founderFrame.addEventListener('mouseleave', () =>
+    animate(founderFrame, { scale: 1 }, { easing: spring({ stiffness: 300, damping: 26 }) })
+  );
+}
+
+/* Value item subtle lift */
+document.querySelectorAll('.value-item').forEach(item => {
+  item.addEventListener('mouseenter', () =>
+    animate(item, { y: -6 }, { easing: spring({ stiffness: 320, damping: 20 }) })
+  );
+  item.addEventListener('mouseleave', () =>
+    animate(item, { y: 0 }, { easing: spring({ stiffness: 300, damping: 24 }) })
+  );
+});
+</script>
+
+</body>
+</html>
