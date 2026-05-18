@@ -32,17 +32,16 @@
       line-height: 1.7;
     }
 
-    /* Paper grain overlay */
+    /* Paper grain overlay — no blend-mode to avoid full-viewport composite on scroll */
     body::before {
       content: '';
       position: fixed;
       inset: 0;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.90' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.9'/%3E%3C/svg%3E");
       background-size: 200px 200px;
-      opacity: 0.038;
+      opacity: 0.045;
       pointer-events: none;
       z-index: 9999;
-      mix-blend-mode: multiply;
     }
 
     section, nav, footer, .above { position: relative; z-index: 1; }
@@ -92,61 +91,58 @@
     .hero {
       min-height: 100vh;
       padding-top: 52px;
-      display: grid;
-      grid-template-columns: 44% 56%;
-    }
-
-    /* Left — deep red traditional panel */
-    .hero-left {
-      background: var(--red-dk);
       position: relative;
+      overflow: hidden;
       display: flex;
       align-items: center;
-      justify-content: center;
-      padding: 80px 48px;
-      overflow: hidden;
     }
 
-    /* Subtle grid pattern on red */
-    .hero-left::before {
-      content: '';
+    .hero-video {
       position: absolute;
       inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48'%3E%3Crect width='48' height='48' fill='none' stroke='rgba(255,235,185,0.055)' stroke-width='0.8'/%3E%3C/svg%3E");
-      background-size: 48px 48px;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+      /* Force GPU compositing layer — prevents shudder during scroll */
+      transform: translate3d(0, 0, 0);
+      backface-visibility: hidden;
+      will-change: transform;
     }
 
-    /* Inner border frame on red */
-    .hero-left-frame {
+    .hero-overlay {
       position: absolute;
-      top: 24px; left: 24px; right: 24px; bottom: 24px;
-      border: 1px solid rgba(255,235,180,0.14);
-      pointer-events: none;
+      inset: 0;
+      background:
+        linear-gradient(to bottom, rgba(28,14,7,0.62) 0%, rgba(28,14,7,0.22) 42%, rgba(28,14,7,0.75) 100%),
+        linear-gradient(to right, rgba(140,22,16,0.48) 0%, transparent 58%);
+      z-index: 1;
     }
 
-    .hero-left-frame::before {
-      content: '';
-      position: absolute;
-      top: 6px; left: 6px; right: 6px; bottom: 6px;
-      border: 1px solid rgba(255,235,180,0.07);
-    }
-
-    /* Corner ornaments */
-    .hero-corner {
-      position: absolute;
-      width: 28px;
-      height: 28px;
-    }
-
-    .hero-corner svg { display: block; }
-    .hero-corner--tl { top: 36px; left: 36px; }
-    .hero-corner--tr { top: 36px; right: 36px; transform: scaleX(-1); }
-    .hero-corner--bl { bottom: 36px; left: 36px; transform: scaleY(-1); }
-    .hero-corner--br { bottom: 36px; right: 36px; transform: scale(-1); }
-
-    .hero-chars {
+    .hero-content {
       position: relative;
       z-index: 2;
+      width: 100%;
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 80px;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 72px;
+      align-items: center;
+    }
+
+    .hero-cn-panel {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      border-left: 1px solid rgba(247,235,200,0.22);
+      border-right: 1px solid rgba(247,235,200,0.22);
+      padding: 24px 22px;
+    }
+
+    .hero-chars {
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -161,18 +157,18 @@
       text-orientation: upright;
       letter-spacing: 0.04em;
       line-height: 1.0;
-      text-shadow: 3px 3px 18px rgba(0,0,0,0.45), 0 0 60px rgba(255,200,100,0.1);
+      text-shadow: 3px 3px 22px rgba(0,0,0,0.6), 0 0 60px rgba(255,200,100,0.12);
       display: flex;
       gap: 8px;
     }
 
     .hero-cn-col {
-      font-size: clamp(72px, 9.5vw, 118px);
+      font-size: clamp(64px, 8vw, 106px);
     }
 
     .hero-cn-divider {
       width: 1px;
-      height: 200px;
+      height: 180px;
       background: linear-gradient(to bottom, transparent, rgba(247,235,200,0.22), transparent);
       margin: 0 4px;
     }
@@ -185,28 +181,6 @@
       text-transform: uppercase;
       margin-top: 20px;
       text-align: center;
-      position: relative;
-      z-index: 2;
-    }
-
-    /* Right — warm paper panel, split internally into text + portrait */
-    .hero-right {
-      background: var(--paper);
-      display: grid;
-      grid-template-columns: 1fr 260px;
-      gap: 48px;
-      align-items: center;
-      padding: 80px 64px 80px 52px;
-      position: relative;
-    }
-
-    /* Faint inner border frame */
-    .hero-right::before {
-      content: '';
-      position: absolute;
-      top: 28px; left: 28px; right: 28px; bottom: 28px;
-      border: 1px solid rgba(180,130,40,0.18);
-      pointer-events: none;
     }
 
     .hero-text-block {
@@ -217,7 +191,7 @@
     .hero-pretitle {
       font-size: 10px;
       letter-spacing: 0.52em;
-      color: var(--red);
+      color: rgba(247,235,200,0.65);
       text-transform: uppercase;
       margin-bottom: 20px;
       font-weight: 400;
@@ -226,17 +200,17 @@
 
     .hero-eng-title {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(38px, 4.8vw, 60px);
+      font-size: clamp(44px, 5.5vw, 74px);
       font-weight: 600;
-      color: var(--ink);
-      line-height: 1.12;
+      color: #F7EBC8;
+      line-height: 1.1;
       letter-spacing: -0.01em;
-      margin-bottom: 0;
+      text-shadow: 0 4px 32px rgba(28,14,7,0.55);
     }
 
     .hero-eng-title em {
       font-style: italic;
-      color: var(--red);
+      color: var(--gold-lt);
     }
 
     .hero-divider {
@@ -249,7 +223,7 @@
     .hero-divider-line {
       height: 1px;
       width: 44px;
-      background: var(--gold);
+      background: rgba(207,160,64,0.65);
     }
 
     .hero-divider-diamond {
@@ -262,23 +236,23 @@
 
     .hero-tagline {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 14.5px;
+      font-size: 15.5px;
       font-style: italic;
-      color: var(--ink-mid);
+      color: rgba(247,235,200,0.78);
       line-height: 1.9;
       letter-spacing: 0.02em;
       margin-bottom: 28px;
+      text-shadow: 0 2px 14px rgba(0,0,0,0.45);
     }
 
-    /* Est. stamp */
     .hero-stamp {
       display: inline-flex;
       flex-direction: column;
       align-items: center;
-      border: 2px solid var(--red);
+      border: 2px solid rgba(247,235,200,0.38);
       padding: 10px 22px;
       position: relative;
-      color: var(--red);
+      color: #F7EBC8;
       width: fit-content;
     }
 
@@ -286,7 +260,7 @@
       content: '';
       position: absolute;
       top: 3px; left: 3px; right: 3px; bottom: 3px;
-      border: 1px solid rgba(193,37,24,0.3);
+      border: 1px solid rgba(247,235,200,0.18);
     }
 
     .hero-stamp-year {
@@ -305,48 +279,35 @@
       margin-top: 3px;
     }
 
-    /* Portrait column */
-    .hero-portrait-col {
+    .hero-scroll {
+      position: absolute;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 14px;
+      gap: 8px;
     }
 
-    /* Food portrait */
-    .hero-portrait {
-      width: 240px;
-      height: 300px;
-      border-radius: 50%;
-      overflow: hidden;
-      border: 3px solid var(--red);
-      box-shadow: 0 0 0 8px rgba(193,37,24,0.1), 0 14px 44px rgba(28,14,7,0.2);
-      position: relative;
-      flex-shrink: 0;
+    .hero-scroll-line {
+      width: 1px;
+      height: 48px;
+      background: linear-gradient(to bottom, rgba(247,235,200,0), rgba(247,235,200,0.5));
+      animation: scroll-anim 2.2s ease-in-out infinite;
     }
 
-    .hero-portrait img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center 18%;
-      filter: sepia(8%) contrast(1.06) brightness(0.92);
+    @keyframes scroll-anim {
+      0%, 100% { opacity: 0.35; transform: scaleY(1); }
+      50% { opacity: 1; transform: scaleY(0.72); }
     }
 
-    .hero-portrait::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to bottom, transparent 55%, rgba(28,14,7,0.38));
-    }
-
-    .hero-portrait-label {
-      font-family: 'Noto Serif SC', serif;
-      font-size: 11.5px;
-      color: var(--ink-lt);
-      letter-spacing: 0.1em;
-      text-align: center;
-      line-height: 1.6;
+    .hero-scroll-text {
+      font-size: 9px;
+      letter-spacing: 0.44em;
+      color: rgba(247,235,200,0.38);
+      text-transform: uppercase;
     }
 
     /* ── MENU SECTION ── */
@@ -787,114 +748,259 @@
       letter-spacing: 0.12em;
     }
 
-    /* ── NEWS SECTION ── */
-    .news-section {
+    /* ── REVIEWS SECTION ── */
+    .reviews-section {
       background: var(--paper-alt);
       padding: 80px;
       border-top: 1px solid rgba(180,130,40,0.18);
     }
 
-    .news-header {
+    .reviews-header {
       display: flex;
       align-items: flex-end;
       justify-content: space-between;
       border-bottom: 2px solid var(--ink);
       padding-bottom: 14px;
-      margin-bottom: 48px;
+      margin-bottom: 52px;
     }
 
     .news-header-right { font-size: 12px; color: var(--ink-lt); margin-bottom: 2px; }
 
-    .news-grid {
+    .reviews-rating-bar {
+      display: flex;
+      align-items: center;
+      gap: 48px;
+      background: var(--paper);
+      border: 1px solid rgba(180,130,40,0.2);
+      padding: 28px 40px;
+      margin-bottom: 48px;
+    }
+
+    .reviews-overall {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .reviews-score {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 68px;
+      font-weight: 600;
+      color: var(--ink);
+      line-height: 1;
+      letter-spacing: -0.03em;
+    }
+
+    .reviews-stars {
+      display: flex;
+      gap: 3px;
+      margin: 8px 0 6px;
+    }
+
+    .star {
+      color: var(--gold);
+      font-size: 16px;
+      line-height: 1;
+    }
+
+    .reviews-count {
+      font-size: 11px;
+      color: var(--ink-lt);
+      letter-spacing: 0.08em;
+    }
+
+    .reviews-platform-label {
+      font-size: 10px;
+      letter-spacing: 0.42em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-top: 6px;
+    }
+
+    .reviews-overall--link,
+    .reviews-yelp-block--link {
+      text-decoration: none;
+      color: inherit;
+      cursor: pointer;
+      transition: opacity 0.2s ease;
+    }
+
+    .reviews-overall--link:hover,
+    .reviews-yelp-block--link:hover { opacity: 0.8; }
+    .reviews-overall--link:focus-visible,
+    .reviews-yelp-block--link:focus-visible { outline: 2px solid var(--red); outline-offset: 4px; }
+
+    .platform-link {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      color: inherit;
+      transition: opacity 0.2s ease;
+    }
+
+    .platform-link:hover { opacity: 0.72; }
+    .platform-link:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
+
+    .reviews-bar-sep {
+      width: 1px;
+      height: 80px;
+      background: linear-gradient(to bottom, transparent, rgba(180,130,40,0.3), transparent);
+      flex-shrink: 0;
+    }
+
+    .reviews-breakdown {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .star-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 11px;
+      color: var(--ink-mid);
+    }
+
+    .star-row-label {
+      width: 40px;
+      text-align: right;
+      flex-shrink: 0;
+      letter-spacing: 0.04em;
+    }
+
+    .star-bar-track {
+      flex: 1;
+      height: 6px;
+      background: rgba(180,130,40,0.15);
+      overflow: hidden;
+    }
+
+    .star-bar-fill {
+      height: 100%;
+      background: var(--gold);
+    }
+
+    .star-row-count {
+      width: 28px;
+      text-align: left;
+      font-size: 10px;
+      color: var(--ink-lt);
+    }
+
+    .reviews-yelp-block {
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-left: 48px;
+      border-left: 1px solid rgba(180,130,40,0.18);
+    }
+
+    .reviews-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 24px;
     }
 
-    .news-card {
+    .review-card {
       background: var(--paper);
       border: 1px solid rgba(180,130,40,0.18);
-      overflow: hidden;
-      transition: border-color 0.25s ease;
-      cursor: pointer;
-    }
-
-    .news-card:hover { border-color: var(--red); }
-
-    .news-img {
-      width: 100%;
-      aspect-ratio: 16/10;
-      overflow: hidden;
+      padding: 28px;
       position: relative;
+      transition: border-color 0.25s ease;
+      cursor: default;
     }
 
-    .news-img img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.5s ease;
-      filter: sepia(18%) contrast(1.04) brightness(0.88);
-    }
+    .review-card:hover { border-color: var(--gold); }
 
-    .news-card:hover .news-img img { transform: scale(1.05); }
-
-    .news-img::after {
-      content: '';
+    .review-card::before {
+      content: '\201C';
       position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(28,14,7,0.48) 0%, transparent 50%);
-    }
-
-    .news-body { padding: 22px 24px 28px; }
-
-    .news-tag {
-      display: block;
-      font-size: 10px;
-      letter-spacing: 0.45em;
-      color: var(--red);
-      text-transform: uppercase;
-      margin-bottom: 8px;
-    }
-
-    .news-title {
+      top: 10px;
+      right: 20px;
       font-family: 'Cormorant Garamond', serif;
-      font-size: 16.5px;
-      font-weight: 600;
-      color: var(--ink);
-      line-height: 1.55;
-      margin-bottom: 6px;
+      font-size: 72px;
+      color: rgba(184,130,40,0.12);
+      line-height: 1;
+      pointer-events: none;
     }
 
-    .news-title-zh {
-      font-family: 'Noto Serif SC', serif;
-      font-size: 12.5px;
-      color: var(--ink-mid);
-      line-height: 1.65;
-      margin-bottom: 10px;
-      display: block;
+    .review-platform {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 14px;
     }
 
-    .news-excerpt {
-      font-size: 13px;
-      color: var(--ink-lt);
-      line-height: 1.85;
+    .platform-dot {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      font-weight: 700;
+      flex-shrink: 0;
     }
 
-    .news-more {
-      display: inline-block;
-      margin-top: 16px;
+    .platform-dot--google {
+      background: #fff;
+      border: 1px solid #e0e0e0;
+      color: #4285F4;
+    }
+
+    .platform-dot--yelp {
+      background: #D32323;
+      color: #fff;
+    }
+
+    .platform-name {
       font-size: 10px;
       letter-spacing: 0.38em;
-      color: var(--red);
       text-transform: uppercase;
-      text-decoration: none;
-      border-bottom: 1px solid rgba(193,37,24,0.3);
-      padding-bottom: 2px;
-      transition: opacity 0.2s ease;
+      color: var(--ink-lt);
     }
 
-    .news-more:hover { opacity: 0.65; }
-    .news-more:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
+    .review-stars {
+      display: flex;
+      gap: 2px;
+      margin-bottom: 14px;
+    }
+
+    .review-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 15px;
+      font-style: italic;
+      color: var(--ink-mid);
+      line-height: 1.9;
+      margin-bottom: 20px;
+    }
+
+    .review-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid rgba(180,130,40,0.14);
+      padding-top: 14px;
+    }
+
+    .review-author {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--ink);
+      letter-spacing: 0.04em;
+    }
+
+    .review-date {
+      font-size: 11px;
+      color: var(--ink-lt);
+      letter-spacing: 0.04em;
+    }
 
     /* ── MAP SECTION ── */
     .map-section {
@@ -908,6 +1014,24 @@
       gap: 56px;
       align-items: start;
       margin-top: 44px;
+    }
+
+    .exterior-photo {
+      width: 100%;
+      margin-top: 32px;
+      height: 220px;
+      overflow: hidden;
+      border: 2px solid rgba(180,130,40,0.28);
+      outline: 6px solid rgba(180,130,40,0.08);
+      position: relative;
+    }
+
+    .exterior-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 30%;
+      filter: sepia(18%) contrast(1.04) brightness(0.9);
     }
 
     .map-frame {
@@ -924,7 +1048,20 @@
       height: 100%;
       border: 0;
       display: block;
-      filter: sepia(20%) hue-rotate(-8deg) brightness(0.90) contrast(1.04) saturate(0.78);
+      filter: sepia(40%) hue-rotate(-5deg) brightness(0.82) contrast(1.1) saturate(0.6);
+    }
+
+    /* Warm brand-color vignette over map */
+    .map-frame::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 20% 50%, rgba(193,37,24,0.06) 0%, transparent 55%),
+        linear-gradient(to bottom, rgba(28,14,7,0.10) 0%, transparent 22%, transparent 78%, rgba(28,14,7,0.10) 100%),
+        linear-gradient(to right, rgba(28,14,7,0.06) 0%, transparent 20%);
+      pointer-events: none;
+      z-index: 1;
     }
 
     .location-list { list-style: none; }
@@ -1075,6 +1212,129 @@
       background: linear-gradient(to right, transparent, var(--gold-lt), transparent);
     }
 
+    /* ── ATMOSPHERE GALLERY ── */
+    .gallery-section {
+      padding: 80px;
+      background: var(--paper);
+    }
+
+    .gallery-header {
+      text-align: center;
+      margin-bottom: 44px;
+    }
+
+    .gallery-strip {
+      display: grid;
+      grid-template-columns: 1fr 1.42fr 1fr;
+      gap: 16px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .gallery-cell {
+      position: relative;
+      overflow: hidden;
+      cursor: default;
+    }
+
+    .gallery-cell--side { height: 320px; }
+    .gallery-cell--center { height: 420px; }
+
+    .gallery-cell img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      filter: sepia(14%) contrast(1.04) brightness(0.88) saturate(0.85);
+      transform: scale(1.04);
+      transition: transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94), filter 0.5s ease;
+      will-change: transform;
+    }
+
+    .gallery-cell:hover img {
+      transform: scale(1);
+      filter: sepia(4%) contrast(1.06) brightness(0.93) saturate(0.95);
+    }
+
+    .gallery-cell::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to top, rgba(28,14,7,0.52) 0%, transparent 55%),
+        linear-gradient(to bottom, rgba(28,14,7,0.18) 0%, transparent 40%);
+      pointer-events: none;
+      transition: opacity 0.5s ease;
+    }
+
+    .gallery-cell:hover::after { opacity: 0.7; }
+
+    .gallery-cell-caption {
+      position: absolute;
+      bottom: 18px;
+      left: 20px;
+      z-index: 2;
+      color: rgba(247,235,200,0.82);
+      font-size: 10px;
+      letter-spacing: 0.42em;
+      text-transform: uppercase;
+      font-family: 'Noto Sans SC', sans-serif;
+    }
+
+    .gallery-frame-line {
+      position: absolute;
+      inset: 8px;
+      border: 1px solid rgba(247,235,200,0.12);
+      pointer-events: none;
+      z-index: 3;
+    }
+
+    /* ── REVIEWS SCORE ROW ── */
+    .reviews-scores-row {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      margin-bottom: 48px;
+    }
+
+    .reviews-score-chip {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      text-decoration: none;
+      color: inherit;
+      padding: 18px 28px;
+      border: 1px solid rgba(180,130,40,0.2);
+      background: var(--paper);
+      transition: border-color 0.2s ease;
+    }
+
+    .reviews-score-chip:hover { border-color: var(--gold); }
+    .reviews-score-chip:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
+
+    .score-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 52px;
+      font-weight: 600;
+      color: var(--ink);
+      line-height: 1;
+      letter-spacing: -0.03em;
+    }
+
+    .score-stars { display: flex; gap: 3px; }
+
+    .score-label {
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      color: var(--ink-lt);
+    }
+
+    .score-sep {
+      width: 1px;
+      height: 60px;
+      background: linear-gradient(to bottom, transparent, rgba(180,130,40,0.3), transparent);
+    }
+
     /* ── TRADITIONAL BANNER ── */
     .trad-banner {
       background: var(--red);
@@ -1122,42 +1382,13 @@
 
 <!-- ── HERO ── -->
 <section class="hero">
+  <video class="hero-video" autoplay muted loop playsinline>
+    <source src="brand_assets/DSCF0049-stabilized.mp4" type="video/mp4">
+  </video>
+  <div class="hero-overlay"></div>
 
-  <!-- Left: Red traditional panel -->
-  <div class="hero-left">
-    <div class="hero-left-frame"></div>
-
-    <!-- Corner ornament SVGs -->
-    <div class="hero-corner hero-corner--tl">
-      <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-        <path d="M2 26 L2 2 L26 2" stroke="rgba(247,235,200,0.35)" stroke-width="1.5"/>
-        <path d="M6 22 L6 6 L22 6" stroke="rgba(247,235,200,0.16)" stroke-width="0.8"/>
-        <circle cx="2" cy="2" r="2" fill="rgba(247,235,200,0.4)"/>
-      </svg>
-    </div>
-    <div class="hero-corner hero-corner--tr">
-      <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-        <path d="M2 26 L2 2 L26 2" stroke="rgba(247,235,200,0.35)" stroke-width="1.5"/>
-        <path d="M6 22 L6 6 L22 6" stroke="rgba(247,235,200,0.16)" stroke-width="0.8"/>
-        <circle cx="2" cy="2" r="2" fill="rgba(247,235,200,0.4)"/>
-      </svg>
-    </div>
-    <div class="hero-corner hero-corner--bl">
-      <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-        <path d="M2 26 L2 2 L26 2" stroke="rgba(247,235,200,0.35)" stroke-width="1.5"/>
-        <path d="M6 22 L6 6 L22 6" stroke="rgba(247,235,200,0.16)" stroke-width="0.8"/>
-        <circle cx="2" cy="2" r="2" fill="rgba(247,235,200,0.4)"/>
-      </svg>
-    </div>
-    <div class="hero-corner hero-corner--br">
-      <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-        <path d="M2 26 L2 2 L26 2" stroke="rgba(247,235,200,0.35)" stroke-width="1.5"/>
-        <path d="M6 22 L6 6 L22 6" stroke="rgba(247,235,200,0.16)" stroke-width="0.8"/>
-        <circle cx="2" cy="2" r="2" fill="rgba(247,235,200,0.4)"/>
-      </svg>
-    </div>
-
-    <div>
+  <div class="hero-content">
+    <div class="hero-cn-panel">
       <div class="hero-chars">
         <div class="hero-cn-title">
           <span class="hero-cn-col">粥麵</span>
@@ -1165,13 +1396,9 @@
           <span class="hero-cn-col">專家</span>
         </div>
       </div>
-      <p class="hero-cn-sub">Mike's Noodle House · 全記麵家</p>
+      <p class="hero-cn-sub">全記麵家</p>
     </div>
-  </div>
 
-  <!-- Right: Paper panel — grid: text | portrait -->
-  <div class="hero-right">
-    <!-- Text column -->
     <div class="hero-text-block">
       <p class="hero-pretitle">Seattle Chinatown · International District</p>
       <h1 class="hero-eng-title">
@@ -1194,14 +1421,11 @@
         <span class="hero-stamp-label">Established · 西雅圖</span>
       </div>
     </div>
+  </div>
 
-    <!-- Portrait column -->
-    <div class="hero-portrait-col">
-      <div class="hero-portrait">
-        <img src="brand_assets/DSCF0052.JPG" alt="全記麵家 Mike's Noodle House">
-      </div>
-      <p class="hero-portrait-label">全記麵家<br>418 Maynard Ave S, Seattle</p>
-    </div>
+  <div class="hero-scroll">
+    <div class="hero-scroll-line"></div>
+    <span class="hero-scroll-text">Scroll</span>
   </div>
 </section>
 
@@ -1226,40 +1450,14 @@
 
   <div class="menu-row">
     <div class="menu-item">
-      <div class="menu-ring" tabindex="0" role="button" aria-label="雲吞麵">
+      <div class="menu-ring" tabindex="0" role="button" aria-label="牛腩雲吞麵">
         <div class="menu-ring-inner">
-          <img src="https://images.unsplash.com/photo-1559948271-7d5c98d2e951?w=160&h=160&fit=crop&auto=format&q=80" alt="雲吞麵">
+          <img src="brand_assets/beef brisket noodle with wonton.jpeg" alt="牛腩雲吞麵" loading="lazy">
         </div>
         <div class="menu-num">一</div>
       </div>
-      <span class="menu-label-zh">雲吞麵</span>
-      <span class="menu-label-en">Wonton Noodle</span>
-    </div>
-
-    <div class="menu-sep"></div>
-
-    <div class="menu-item">
-      <div class="menu-ring" tabindex="0" role="button" aria-label="粥">
-        <div class="menu-ring-inner">
-          <img src="https://images.unsplash.com/photo-1766761562530-c8dd12c96d9a?w=160&h=160&fit=crop&auto=format&q=80" alt="粥">
-        </div>
-        <div class="menu-num">二</div>
-      </div>
-      <span class="menu-label-zh">粥</span>
-      <span class="menu-label-en">Rice Congee</span>
-    </div>
-
-    <div class="menu-sep"></div>
-
-    <div class="menu-item">
-      <div class="menu-ring" tabindex="0" role="button" aria-label="水餃麵">
-        <div class="menu-ring-inner">
-          <img src="https://images.unsplash.com/photo-1747972312960-12925acc5790?w=160&h=160&fit=crop&auto=format&q=80" alt="水餃麵">
-        </div>
-        <div class="menu-num">三</div>
-      </div>
-      <span class="menu-label-zh">水餃麵</span>
-      <span class="menu-label-en">Sui-Kau Noodle</span>
+      <span class="menu-label-zh">牛腩雲吞麵</span>
+      <span class="menu-label-en">Beef Brisket & Wonton Noodle</span>
     </div>
 
     <div class="menu-sep"></div>
@@ -1267,25 +1465,25 @@
     <div class="menu-item">
       <div class="menu-ring" tabindex="0" role="button" aria-label="油條">
         <div class="menu-ring-inner">
-          <img src="https://images.unsplash.com/photo-1555126634-323283e090fa?w=160&h=160&fit=crop&auto=format&q=80" alt="油條">
+          <img src="brand_assets/youtiao.jpeg" alt="油條" loading="lazy">
         </div>
-        <div class="menu-num">四</div>
+        <div class="menu-num">二</div>
       </div>
       <span class="menu-label-zh">油條</span>
-      <span class="menu-label-en">Youtiao</span>
+      <span class="menu-label-en">Chinese Fried Dough</span>
     </div>
 
     <div class="menu-sep"></div>
 
     <div class="menu-item">
-      <div class="menu-ring" tabindex="0" role="button" aria-label="叉燒麵">
+      <div class="menu-ring" tabindex="0" role="button" aria-label="豆漿">
         <div class="menu-ring-inner">
-          <img src="https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=160&h=160&fit=crop&auto=format&q=80" alt="叉燒麵">
+          <img src="brand_assets/soy milk.jpg" alt="豆漿" loading="lazy">
         </div>
-        <div class="menu-num">五</div>
+        <div class="menu-num">三</div>
       </div>
-      <span class="menu-label-zh">叉燒麵</span>
-      <span class="menu-label-en">BBQ Pork Noodle</span>
+      <span class="menu-label-zh">豆漿</span>
+      <span class="menu-label-en">Fresh Soy Milk</span>
     </div>
   </div>
 
@@ -1300,27 +1498,43 @@
   </div>
 </section>
 
+<!-- ── ATMOSPHERE GALLERY ── -->
+<section class="gallery-section">
+  <div class="gallery-header">
+    <span class="menu-eyebrow">Kitchen to Table · 廚房到餐桌</span>
+    <h2 class="menu-title-zh">每一碗的心意</h2>
+    <p class="menu-title-en">Crafted fresh, every morning</p>
+  </div>
+
+  <div class="gallery-strip">
+    <div class="gallery-cell gallery-cell--side">
+      <img src="brand_assets/IMG_4929.jpg" alt="乾麵 — Dry Noodle">
+      <div class="gallery-frame-line"></div>
+      <span class="gallery-cell-caption">乾麵 · Dry Style</span>
+    </div>
+    <div class="gallery-cell gallery-cell--center">
+      <img src="brand_assets/IMG_4931.jpg" alt="牛腩 — Beef Brisket">
+      <div class="gallery-frame-line"></div>
+      <span class="gallery-cell-caption">牛腩 · Braised Brisket</span>
+    </div>
+    <div class="gallery-cell gallery-cell--side">
+      <img src="brand_assets/IMG_4934.jpg" alt="雲吞 — Wonton Noodle">
+      <div class="gallery-frame-line"></div>
+      <span class="gallery-cell-caption">雲吞 · Wonton Soup</span>
+    </div>
+  </div>
+</section>
+
 <div class="gold-rule"></div>
 
 <!-- ── OUR STORY ── -->
 <section class="story-section" id="story">
   <div class="story-text">
     <span class="section-eyebrow">Our Story · 我們的故事</span>
-    <h2 class="section-h2">A Bowl Built on Tradition,<br>A Kitchen Built on Love</h2>
-    <span class="section-h2-zh">一碗麵，一段傳奇</span>
+    <h2 class="section-h2">Forty Years.<br>The Same Honest Bowl.</h2>
 
     <p class="section-body">
-      Tucked in the heart of Seattle's Chinatown-International District, Mike's Noodle House — 全記麵家 — has been serving hand-crafted wonton noodle soup and silky congee since 1986. For the Hong Kong families who have called this neighborhood home for decades, it is not just a restaurant. It is where you go when you need to feel like you never left.
-    </p>
-    <p class="section-body-zh">
-      自1986年開業至今，全記麵家以正宗港式雲吞麵及粥品為西雅圖華埠服務近四十年。對於在此落地生根的香港移民而言，這裡不只是一間食肆，更是他們心中的「歸處」。
-    </p>
-
-    <p class="section-body">
-      Founder Mike brought his family's craft across the Pacific — hand-folded wontons with paper-thin wrappers, slow-simmered pork bone broth, fresh egg noodles made each morning. A tradition that has never once cut corners. Four decades of the same honest commitment: food that never lies.
-    </p>
-    <p class="section-body-zh">
-      Mike將祖傳手藝帶到美國，以現熬豬骨湯、手製蛋麵，每日新鮮，從不妥協。四十年如一日，食物不欺人。
+      Mike's Noodle House — 全記麵家 — has been a fixture of Seattle's Chinatown-International District since 1986. Hand-folded wontons, slow-simmered pork bone broth, fresh egg noodles made each morning. No shortcuts, no changes. For the families who grew up here, it's never been just a restaurant.
     </p>
 
     <a href="about.html" class="red-btn">了解更多 · Learn More →</a>
@@ -1329,7 +1543,7 @@
   <div class="story-visual">
     <div class="story-frame">
       <div class="story-photo">
-        <img src="brand_assets/DSCF0058.JPG" alt="Owner — 全記麵家">
+        <img src="brand_assets/web_DSCF0058.jpg" alt="Owner — 全記麵家" loading="lazy">
       </div>
       <div class="story-seal">
         <span class="story-seal-zh">正宗<br>傳統</span>
@@ -1342,53 +1556,81 @@
 
 <div class="gold-rule"></div>
 
-<!-- ── NEWS & HIGHLIGHTS ── -->
-<section class="news-section" id="news">
-  <div class="news-header">
+<!-- ── REVIEWS ── -->
+<section class="reviews-section" id="reviews">
+  <div class="reviews-header">
     <div>
-      <span class="section-eyebrow" style="margin-bottom:6px;">Latest News · 最新消息</span>
-      <h2 class="section-h2" style="margin-bottom:0;">What's New at Mike's</h2>
+      <span class="section-eyebrow" style="margin-bottom:6px;">Guest Reviews · 顧客評價</span>
+      <h2 class="section-h2" style="margin-bottom:0;">What Our Guests Are Saying</h2>
     </div>
-    <span class="news-header-right">全記消息</span>
+    <span class="news-header-right">口碑載道</span>
   </div>
 
-  <div class="news-grid">
-    <div class="news-card">
-      <div class="news-img">
-        <img src="https://images.unsplash.com/photo-1583475020831-fb4fbb497315?w=400&h=250&fit=crop&auto=format&q=80" alt="News 1">
+  <!-- Platform scores -->
+  <div class="reviews-scores-row">
+    <a href="https://www.google.com/maps/search/?api=1&query=Mike%27s+Noodle+House&query_place_id=ChIJTVaFaLxqkFQR42Oyj9kuuqg" target="_blank" rel="noopener" class="reviews-score-chip">
+      <span class="score-num">4.2</span>
+      <div class="score-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star" style="opacity:0.3;">★</span></div>
+      <span class="score-label">Google · 1,400+ reviews ↗</span>
+    </a>
+    <div class="score-sep"></div>
+    <a href="https://www.yelp.com/biz/mikes-noodle-house-seattle" target="_blank" rel="noopener" class="reviews-score-chip">
+      <span class="score-num">4.0</span>
+      <div class="score-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star" style="opacity:0.2;">★</span></div>
+      <span class="score-label" style="color:#C8373B;">Yelp · 1,552 reviews ↗</span>
+    </a>
+  </div>
+
+  <!-- Review cards — sourced from verified press -->
+  <div class="reviews-grid">
+    <div class="review-card">
+      <div class="review-platform">
+        <a href="https://www.theinfatuation.com/seattle/reviews/mike-s-noodle-house" target="_blank" rel="noopener" class="platform-link">
+          <div class="platform-dot platform-dot--google" style="font-size:8px;font-weight:700;letter-spacing:-0.02em;">INF</div>
+          <span class="platform-name">The Infatuation ↗</span>
+        </a>
       </div>
-      <div class="news-body">
-        <span class="news-tag">Restaurant News · 餐廳新聞</span>
-        <h3 class="news-title">Forty Years Strong: Mike's and the Soul of Seattle's CID</h3>
-        <span class="news-title-zh">全記麵家四十年：從唐人街到每個老饕的心中</span>
-        <p class="news-excerpt">Since opening in 1986, Mike's Noodle House has built its reputation on one honest bowl of wonton noodle soup — and become a cultural landmark in Seattle's Chinese-American community.</p>
-        <a href="#" class="news-more">Read More · 閱讀更多 →</a>
+      <div class="review-stars">
+        <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star" style="opacity:0.3;">★</span>
+      </div>
+      <p class="review-text">"Slinky egg noodles are weighed down by husky chunks of tender brisket and bright vegetables. Congee is thick and comforting."</p>
+      <div class="review-footer">
+        <span class="review-author">The Infatuation</span>
+        <span class="review-date">Score: 8.2 / 10</span>
       </div>
     </div>
 
-    <div class="news-card">
-      <div class="news-img">
-        <img src="https://images.unsplash.com/photo-1556742524-750f2ab99913?w=400&h=250&fit=crop&auto=format&q=80" alt="News 2">
+    <div class="review-card">
+      <div class="review-platform">
+        <a href="https://www.seattletimes.com/life/food-drink/mikes-noodle-house-a-fresh-standout-among-oodles-of-spots/" target="_blank" rel="noopener" class="platform-link">
+          <div class="platform-dot platform-dot--google" style="font-size:8px;font-weight:700;letter-spacing:-0.02em;">ST</div>
+          <span class="platform-name">Seattle Times ↗</span>
+        </a>
       </div>
-      <div class="news-body">
-        <span class="news-tag">Food Review · 美食評鑑</span>
-        <h3 class="news-title">Seattle Times Names Mike's One of the City's Top Ten Noodle Bowls</h3>
-        <span class="news-title-zh">《西雅圖時報》：全記榜上有名</span>
-        <p class="news-excerpt">The Seattle Times praised the broth's crystal clarity and the wontons' paper-thin wrappers — a rare taste of authentic Hong Kong at the heart of the city.</p>
-        <a href="#" class="news-more">Read More · 閱讀更多 →</a>
+      <div class="review-stars">
+        <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+      </div>
+      <p class="review-text">"Noodle soups shine, and fresh, bursting-at-the-seams dumplings are truly outstanding."</p>
+      <div class="review-footer">
+        <span class="review-author">Seattle Times</span>
+        <span class="review-date">A Fresh Standout</span>
       </div>
     </div>
 
-    <div class="news-card">
-      <div class="news-img">
-        <img src="https://images.unsplash.com/photo-1733907557440-e8f8e179cd56?w=400&h=250&fit=crop&auto=format&q=80" alt="News 3">
+    <div class="review-card">
+      <div class="review-platform">
+        <a href="https://seattle.eater.com/" target="_blank" rel="noopener" class="platform-link">
+          <div class="platform-dot platform-dot--yelp" style="font-size:8px;letter-spacing:-0.02em;">EAT</div>
+          <span class="platform-name">Eater Seattle ↗</span>
+        </a>
       </div>
-      <div class="news-body">
-        <span class="news-tag">Community · 社區活動</span>
-        <h3 class="news-title">A Family Recipe, Forty Years Running: The Story Behind the Broth</h3>
-        <span class="news-title-zh">傳承四十年的家傳秘方，從香港到西雅圖</span>
-        <p class="news-excerpt">Founder Mike brought his family's craft across the Pacific — slow-simmered bone broth, handmade egg noodles, fresh daily. A tradition that has never once cut corners.</p>
-        <a href="#" class="news-more">Read More · 閱讀更多 →</a>
+      <div class="review-stars">
+        <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+      </div>
+      <p class="review-text">"The ultimate in C-ID Chinese comfort food." Named to Eater's Essential Asian Noodle Destinations and Seattle Met's 100 Best Restaurants.</p>
+      <div class="review-footer">
+        <span class="review-author">Eater Seattle · Seattle Met</span>
+        <span class="review-date">2019 · 2022</span>
       </div>
     </div>
   </div>
@@ -1436,6 +1678,14 @@
           無需訂位 · Walk-ins Welcome<br>
           電話 · Tel: (206) 389-7099
         </p>
+        <p style="margin-top:14px;">
+          Mon – Fri &nbsp;&nbsp;10:00 AM – 7:00 PM<br>
+          Sat – Sun &nbsp;&nbsp;&nbsp;10:00 AM – 8:00 PM
+        </p>
+      </div>
+
+      <div class="exterior-photo">
+        <img src="brand_assets/web_DSCF0052.jpg" alt="Mike's Noodle House exterior — 418 Maynard Ave S" loading="lazy">
       </div>
     </div>
   </div>
@@ -1473,11 +1723,11 @@
         </ul>
       </div>
       <div>
-        <p class="footer-col-head">News</p>
+        <p class="footer-col-head">Reviews</p>
         <ul class="footer-links">
-          <li><a href="#" class="footer-link">Latest News</a></li>
-          <li><a href="#" class="footer-link">Press</a></li>
-          <li><a href="#" class="footer-link">Community</a></li>
+          <li><a href="#reviews" class="footer-link">Guest Reviews</a></li>
+          <li><a href="https://www.google.com/maps/search/?api=1&query=Mike%27s+Noodle+House&query_place_id=ChIJTVaFaLxqkFQR42Oyj9kuuqg" target="_blank" rel="noopener" class="footer-link">Google Maps ↗</a></li>
+          <li><a href="https://www.yelp.com/biz/mikes-noodle-house-seattle" target="_blank" rel="noopener" class="footer-link">Yelp ↗</a></li>
         </ul>
       </div>
       <div>
@@ -1491,7 +1741,7 @@
     </div>
   </div>
   <div class="footer-bottom">
-    <p class="footer-copy">© 2024 全記麵家 Mike's Noodle House. All rights reserved.</p>
+    <p class="footer-copy">© 2025 全記麵家 Mike's Noodle House. All rights reserved.</p>
     <div class="socials">
       <a href="#" class="social-btn" title="Facebook" aria-label="Facebook">f</a>
       <a href="#" class="social-btn" title="Instagram" aria-label="Instagram">ig</a>
@@ -1507,8 +1757,16 @@
 (function () {
   gsap.registerPlugin(ScrollTrigger);
 
+  /* Kill listeners after firing — no dead triggers polling on every scroll */
+  ScrollTrigger.config({ limitCallbacks: true, ignoreMobileResize: true });
+
+  /* Helper: shorthand with once:true baked in */
+  function st(trigger, start) {
+    return { trigger, start: start || 'top 82%', once: true };
+  }
+
   /* ── HERO — staggered reveal on load ── */
-  const heroTl = gsap.timeline({ delay: 0.2 });
+  const heroTl = gsap.timeline({ delay: 0.3 });
   heroTl
     .from('.hero-cn-title',    { opacity: 0, y: 40, duration: 1.1, ease: 'power3.out' })
     .from('.hero-cn-sub',      { opacity: 0, duration: 0.7, ease: 'power2.out' }, '-=0.4')
@@ -1516,60 +1774,74 @@
     .from('.hero-eng-title',   { opacity: 0, y: 32, duration: 0.9,  ease: 'power3.out' }, '-=0.45')
     .from('.hero-divider',     { scaleX: 0, transformOrigin: 'center', duration: 0.55, ease: 'power2.inOut' }, '-=0.3')
     .from('.hero-tagline',     { opacity: 0, y: 14, duration: 0.65, ease: 'power2.out' }, '-=0.2')
-    .from('.hero-portrait',    { opacity: 0, scale: 0.93, duration: 0.9, ease: 'power2.out' }, 0.3)
-    .from('.hero-stamp',       { opacity: 0, y: 12, duration: 0.6, ease: 'power2.out' }, '-=0.2');
+    .from('.hero-stamp',       { opacity: 0, y: 12, duration: 0.6, ease: 'power2.out' }, '-=0.2')
+    .from('.hero-scroll',      { opacity: 0, duration: 0.6, ease: 'power2.out' }, '-=0.1');
 
   /* ── TRAD BANNER ── */
   gsap.from('.trad-banner-text, .trad-banner-dot', {
-    scrollTrigger: { trigger: '.trad-banner', start: 'top 90%' },
+    scrollTrigger: st('.trad-banner', 'top 90%'),
     opacity: 0, stagger: 0.07, duration: 0.5, ease: 'power2.out'
   });
 
-  /* ── MENU ── */
+  /* ── MENU (consolidated into one trigger) ── */
   gsap.from('.menu-header > *', {
-    scrollTrigger: { trigger: '.menu-section', start: 'top 80%' },
+    scrollTrigger: st('.menu-section', 'top 80%'),
     opacity: 0, y: 22, stagger: 0.1, duration: 0.75, ease: 'power3.out'
   });
   gsap.from('.menu-item', {
-    scrollTrigger: { trigger: '.menu-row', start: 'top 82%' },
+    scrollTrigger: st('.menu-row'),
     opacity: 0, y: 48, stagger: 0.12, duration: 0.9, ease: 'power3.out'
   });
   gsap.from('.menu-cta', {
-    scrollTrigger: { trigger: '.menu-cta', start: 'top 88%' },
+    scrollTrigger: st('.menu-cta', 'top 88%'),
     opacity: 0, y: 28, duration: 0.8, ease: 'power3.out'
+  });
+
+  /* ── GALLERY ── */
+  gsap.from('.gallery-header > *', {
+    scrollTrigger: st('.gallery-section', 'top 80%'),
+    opacity: 0, y: 22, stagger: 0.1, duration: 0.75, ease: 'power3.out'
+  });
+  gsap.from('.gallery-cell', {
+    scrollTrigger: st('.gallery-strip', 'top 84%'),
+    opacity: 0, y: 44, stagger: 0.14, duration: 0.9, ease: 'power3.out'
   });
 
   /* ── STORY ── */
   gsap.from('.story-text > *', {
-    scrollTrigger: { trigger: '.story-section', start: 'top 76%' },
+    scrollTrigger: st('.story-section', 'top 76%'),
     opacity: 0, x: -40, stagger: 0.09, duration: 0.85, ease: 'power3.out'
   });
   gsap.from('.story-visual', {
-    scrollTrigger: { trigger: '.story-section', start: 'top 76%' },
+    scrollTrigger: st('.story-section', 'top 76%'),
     opacity: 0, x: 50, duration: 1.0, ease: 'power3.out'
   });
 
-  /* ── NEWS ── */
-  gsap.from('.news-header > *', {
-    scrollTrigger: { trigger: '.news-section', start: 'top 82%' },
+  /* ── REVIEWS ── */
+  gsap.from('.reviews-header > *', {
+    scrollTrigger: st('.reviews-section'),
     opacity: 0, y: -16, stagger: 0.08, duration: 0.65, ease: 'power2.out'
   });
-  gsap.from('.news-card', {
-    scrollTrigger: { trigger: '.news-grid', start: 'top 84%' },
-    opacity: 0, y: 38, scale: 0.95, stagger: 0.13, duration: 0.85, ease: 'back.out(1.4)'
+  gsap.from('.reviews-score-chip', {
+    scrollTrigger: st('.reviews-scores-row', 'top 86%'),
+    opacity: 0, y: 20, stagger: 0.12, duration: 0.7, ease: 'power3.out'
+  });
+  gsap.from('.review-card', {
+    scrollTrigger: st('.reviews-grid', 'top 84%'),
+    opacity: 0, y: 38, stagger: 0.13, duration: 0.85, ease: 'power3.out'
   });
 
   /* ── MAP ── */
   gsap.from('.map-section .section-eyebrow, .map-section .section-h2', {
-    scrollTrigger: { trigger: '.map-section', start: 'top 80%' },
+    scrollTrigger: st('.map-section', 'top 80%'),
     opacity: 0, y: 20, stagger: 0.1, duration: 0.7, ease: 'power2.out'
   });
   gsap.from('.map-frame', {
-    scrollTrigger: { trigger: '.map-layout', start: 'top 82%' },
+    scrollTrigger: st('.map-layout'),
     opacity: 0, x: -40, duration: 0.9, ease: 'power3.out'
   });
   gsap.from('.location-item, .location-info', {
-    scrollTrigger: { trigger: '.map-layout', start: 'top 82%' },
+    scrollTrigger: st('.map-layout'),
     opacity: 0, x: 30, stagger: 0.1, duration: 0.65, ease: 'power2.out'
   });
 })();
@@ -1589,10 +1861,10 @@ document.querySelectorAll('.red-btn').forEach(btn => {
   );
 });
 
-/* News cards lift */
-document.querySelectorAll('.news-card').forEach(card => {
+/* Review cards lift */
+document.querySelectorAll('.review-card').forEach(card => {
   card.addEventListener('mouseenter', () =>
-    animate(card, { y: -8 }, { easing: spring({ stiffness: 280, damping: 18 }) })
+    animate(card, { y: -6 }, { easing: spring({ stiffness: 280, damping: 18 }) })
   );
   card.addEventListener('mouseleave', () =>
     animate(card, { y: 0 }, { easing: spring({ stiffness: 300, damping: 24 }) })

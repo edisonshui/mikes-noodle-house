@@ -304,162 +304,121 @@
       max-width: 640px;
     }
 
-    /* ── DISH GRID ── */
-    .dishes-grid {
+    /* ── HIGHLIGHT GALLERY ── */
+    .highlights-layout {
       display: grid;
+      gap: 14px;
+    }
+
+    .highlights-layout.left-heavy {
+      grid-template-columns: 1.5fr 1fr;
+      grid-template-rows: repeat(2, 1fr);
+      height: 580px;
+    }
+
+    .highlights-layout.right-heavy {
+      grid-template-columns: 1fr 1.5fr;
+      grid-template-rows: repeat(2, 1fr);
+      height: 580px;
+    }
+
+    .highlights-layout.three-equal {
       grid-template-columns: repeat(3, 1fr);
-      gap: 28px;
+      height: 420px;
     }
 
-    .dish-card {
-      background: var(--paper);
-      border: 1px solid rgba(180,130,40,0.2);
-      overflow: hidden;
-      transition: border-color 0.25s ease, box-shadow 0.3s ease;
-    }
-
-    .cat-section:nth-child(even) .dish-card {
-      background: var(--cream);
-    }
-
-    .dish-card:hover {
-      border-color: var(--red);
-      box-shadow: 0 8px 32px rgba(28,14,7,0.1), 0 2px 8px rgba(193,37,24,0.06);
-    }
-
-    .dish-photo {
-      width: 100%;
-      aspect-ratio: 4 / 3;
-      overflow: hidden;
+    .highlight-card {
       position: relative;
+      overflow: hidden;
+      cursor: default;
     }
 
-    .dish-photo img {
+    .highlight-card.span-rows {
+      grid-row: 1 / 3;
+    }
+
+    .highlight-card img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      filter: sepia(10%) contrast(1.04) brightness(0.88);
-      transition: transform 0.55s ease, filter 0.35s ease;
+      filter: sepia(8%) contrast(1.05) brightness(0.82);
+      transition: transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94),
+                  filter 0.45s ease;
     }
 
-    .dish-card:hover .dish-photo img {
-      transform: scale(1.06);
-      filter: sepia(0%) contrast(1.07) brightness(0.95);
+    .highlight-card:hover img {
+      transform: scale(1.065);
+      filter: sepia(0%) contrast(1.08) brightness(0.9);
     }
 
-    .dish-photo::after {
-      content: '';
+    .highlight-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(to bottom, transparent 55%, rgba(28,14,7,0.36));
+      background: linear-gradient(to bottom,
+        transparent 25%,
+        rgba(28,14,7,0.35) 55%,
+        rgba(28,14,7,0.88) 100%);
       pointer-events: none;
     }
 
-    .dish-info {
-      padding: 20px 22px 24px;
+    .highlight-label {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 28px 30px;
+      transform: translateY(0);
+      transition: padding 0.35s ease;
     }
 
-    .dish-names {
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-      gap: 8px;
-      margin-bottom: 6px;
+    .highlight-card:hover .highlight-label {
+      padding-bottom: 34px;
     }
 
-    .dish-zh {
+    .highlight-zh {
       font-family: 'Noto Serif SC', serif;
-      font-size: 17px;
+      font-size: 22px;
       font-weight: 700;
-      color: var(--ink);
-      letter-spacing: 0.05em;
+      color: #F7EBC8;
+      letter-spacing: 0.06em;
+      display: block;
+      margin-bottom: 4px;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.4);
     }
 
-    .dish-price {
+    .highlight-card.span-rows .highlight-zh {
+      font-size: 28px;
+    }
+
+    .highlight-en {
       font-family: 'Cormorant Garamond', serif;
       font-size: 14px;
-      color: var(--red);
-      letter-spacing: 0.04em;
-      white-space: nowrap;
-      flex-shrink: 0;
-    }
-
-    .dish-en {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 13.5px;
       font-style: italic;
-      color: var(--ink-lt);
-      letter-spacing: 0.03em;
+      color: rgba(247,235,200,0.65);
+      letter-spacing: 0.1em;
       display: block;
-      margin-bottom: 10px;
+      text-shadow: 0 1px 8px rgba(0,0,0,0.55);
     }
 
-    .dish-desc {
-      font-size: 12.5px;
-      color: var(--ink-mid);
-      line-height: 1.9;
-      border-top: 1px solid rgba(180,130,40,0.15);
-      padding-top: 10px;
+    .highlight-card.span-rows .highlight-en {
+      font-size: 16px;
     }
 
-    /* ── SIDES SECTION (compact list) ── */
-    .sides-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
+    .highlight-tag {
+      display: inline-block;
+      margin-bottom: 8px;
+      font-size: 9.5px;
+      letter-spacing: 0.45em;
+      color: var(--gold-lt);
+      text-transform: uppercase;
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
     }
 
-    .side-card {
-      display: flex;
-      gap: 18px;
-      padding: 18px 20px;
-      border: 1px solid rgba(180,130,40,0.2);
-      background: var(--paper);
-      transition: border-color 0.25s ease;
-    }
-
-    .side-card:hover { border-color: rgba(180,130,40,0.5); }
-
-    .side-photo {
-      width: 90px;
-      height: 90px;
-      flex-shrink: 0;
-      overflow: hidden;
-      border: 2px solid rgba(180,130,40,0.18);
-    }
-
-    .side-photo img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      filter: sepia(10%) contrast(1.04) brightness(0.9);
-      transition: transform 0.4s ease;
-    }
-
-    .side-card:hover .side-photo img { transform: scale(1.08); }
-
-    .side-info { display: flex; flex-direction: column; justify-content: center; }
-
-    .side-zh {
-      font-family: 'Noto Serif SC', serif;
-      font-size: 15px;
-      font-weight: 700;
-      color: var(--ink);
-      margin-bottom: 3px;
-    }
-
-    .side-en {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 13px;
-      font-style: italic;
-      color: var(--ink-lt);
-      margin-bottom: 6px;
-    }
-
-    .side-desc {
-      font-size: 12px;
-      color: var(--ink-mid);
-      line-height: 1.75;
+    .highlight-card:hover .highlight-tag {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     /* ── PRINTED MENU REFERENCE ── */
@@ -521,40 +480,43 @@
       border: 1px solid rgba(207,160,64,0.15);
     }
 
-    .ref-img-frame > img {
-      width: 100%;
-      height: auto;
-      display: block;
-      filter: brightness(0.95) contrast(1.02);
-      transition: filter 0.3s ease;
-    }
-
-    .ref-img-frame:hover > img { filter: brightness(1.0) contrast(1.04); }
-
-    /* Portrait menu scan displayed as landscape (750×1000 → rotate 90° CW → 1000×750) */
-    .scan-landscape-from-portrait {
+    .ref-img-wrap {
       position: relative;
       width: 100%;
       aspect-ratio: 4 / 3;
       overflow: hidden;
+      display: block;
     }
 
-    .scan-landscape-from-portrait img {
+    .ref-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      filter: brightness(0.95) contrast(1.02);
+      transition: filter 0.3s ease, transform 0.45s ease;
+    }
+
+    .ref-img-frame:hover .ref-img-wrap img {
+      filter: brightness(1.0) contrast(1.04);
+      transform: scale(1.02);
+    }
+
+    /* Portrait menu scan: pre-rotation sizing so -90° fills the 4:3 frame */
+    .ref-img-wrap img.portrait-ccw {
       position: absolute;
-      /* Element pre-rotation: w=0.75W, h=W so that after 90° CW rotation
-         visual dimensions become W×0.75W — exactly filling the 4:3 container */
       width: 75%;
       height: 133.3333%;
-      left: 12.5%;        /* (W − 0.75W) / 2  = 0.125W */
-      top: -16.6667%;     /* (0.375W − 0.5W) / 0.75W  = −16.67% of container height */
+      left: 12.5%;
+      top: -16.6667%;
+      object-fit: unset;
       transform: rotate(-90deg);
       transform-origin: center center;
-      filter: brightness(0.95) contrast(1.02);
-      transition: filter 0.3s ease;
     }
 
-    .ref-img-frame:hover .scan-landscape-from-portrait img {
-      filter: brightness(1.0) contrast(1.04);
+    .ref-img-frame:hover .ref-img-wrap img.portrait-ccw {
+      transform: rotate(-90deg) scale(1.02);
     }
 
     .ref-caption {
@@ -737,7 +699,7 @@
       <div class="menu-hero-rule-diamond"></div>
       <div class="menu-hero-rule-line"></div>
     </div>
-    <p class="menu-hero-sub">See every dish before you order · 點餐前認識每一道菜</p>
+    <p class="menu-hero-sub">Highlights from our kitchen · 廚房精選</p>
   </div>
 </div>
 
@@ -794,117 +756,35 @@
     </p>
   </div>
 
-  <div class="dishes-grid">
+  <div class="highlights-layout left-heavy">
 
-    <div class="dish-card">
-      <div class="dish-photo">
-        <img src="brand_assets/Mike%27s%20Noodle%20House%20Pictures/IMG_3538.jpg" alt="雲吞麵">
-      </div>
-      <div class="dish-info">
-        <div class="dish-names">
-          <span class="dish-zh">雲吞麵</span>
-          <span class="dish-price">from $11</span>
-        </div>
-        <span class="dish-en">Wonton Noodle Soup</span>
-        <p class="dish-desc">Our signature. Plump handmade wontons stuffed with seasoned pork and shrimp, served in a golden clear broth with springy egg noodles. The dish Mike's is known for.</p>
+    <div class="highlight-card span-rows">
+      <img src="brand_assets/Mike%27s%20Noodle%20House%20Pictures/IMG_3538.jpg" alt="雲吞麵">
+      <div class="highlight-overlay"></div>
+      <div class="highlight-label">
+        <span class="highlight-tag">Signature</span>
+        <span class="highlight-zh">雲吞麵</span>
+        <span class="highlight-en">Wonton Noodle Soup</span>
       </div>
     </div>
 
-    <div class="dish-card">
-      <div class="dish-photo">
-        <img src="https://images.unsplash.com/photo-1582878826629-29b7ad1cdc43?w=440&h=330&fit=crop&auto=format&q=80" alt="魚蛋麵">
-      </div>
-      <div class="dish-info">
-        <div class="dish-names">
-          <span class="dish-zh">魚蛋麵</span>
-          <span class="dish-price">from $11</span>
-        </div>
-        <span class="dish-en">Fish Ball Noodle Soup</span>
-        <p class="dish-desc">Smooth, bouncy fish balls in a clean, delicate broth. A classic Hong Kong street food staple — light and satisfying.</p>
+    <div class="highlight-card">
+      <img src="brand_assets/Mike%27s%20Noodle%20House%20Pictures/IMG_3560.jpg" alt="牛腩麵">
+      <div class="highlight-overlay"></div>
+      <div class="highlight-label">
+        <span class="highlight-tag">House Favourite</span>
+        <span class="highlight-zh">牛腩麵</span>
+        <span class="highlight-en">Beef Brisket Noodle</span>
       </div>
     </div>
 
-    <div class="dish-card">
-      <div class="dish-photo">
-        <img src="brand_assets/Mike%27s%20Noodle%20House%20Pictures/IMG_3560.jpg" alt="牛腩麵">
-      </div>
-      <div class="dish-info">
-        <div class="dish-names">
-          <span class="dish-zh">牛腩麵</span>
-          <span class="dish-price">from $12</span>
-        </div>
-        <span class="dish-en">Beef Brisket Noodle Soup</span>
-        <p class="dish-desc">Slow-braised beef brisket, fork-tender with deep savory flavor, served over fresh noodles in a rich, warming broth.</p>
-      </div>
-    </div>
-
-    <div class="dish-card">
-      <div class="dish-photo">
-        <img src="brand_assets/Mike%27s%20Noodle%20House%20Pictures/IMG_3537.jpg" alt="水餃麵">
-      </div>
-      <div class="dish-info">
-        <div class="dish-names">
-          <span class="dish-zh">水餃麵</span>
-          <span class="dish-price">from $12</span>
-        </div>
-        <span class="dish-en">Sui-Kau Noodle Soup</span>
-        <p class="dish-desc">Large, generously filled dumplings with pork and shrimp, served in clear broth with smooth noodles. Heartier than wontons — a favorite for big appetites.</p>
-      </div>
-    </div>
-
-    <div class="dish-card">
-      <div class="dish-photo">
-        <img src="brand_assets/Mike%27s%20Noodle%20House%20Pictures/IMG_4932.jpg" alt="牛丸麵">
-      </div>
-      <div class="dish-info">
-        <div class="dish-names">
-          <span class="dish-zh">牛丸麵</span>
-          <span class="dish-price">from $11</span>
-        </div>
-        <span class="dish-en">Beef Ball Noodle Soup</span>
-        <p class="dish-desc">Handmade beef balls with a satisfying springy chew, served in clear broth. A classic Cantonese noodle house staple.</p>
-      </div>
-    </div>
-
-    <div class="dish-card">
-      <div class="dish-photo">
-        <img src="brand_assets/Mike%27s%20Noodle%20House%20Pictures/IMG_0358.jpeg" alt="叉燒麵">
-      </div>
-      <div class="dish-info">
-        <div class="dish-names">
-          <span class="dish-zh">叉燒麵</span>
-          <span class="dish-price">from $12</span>
-        </div>
-        <span class="dish-en">BBQ Pork Noodle Soup</span>
-        <p class="dish-desc">Thinly sliced Cantonese char siu — sweet, smoky, caramelized edges — draped over silky noodles in a light, fragrant broth.</p>
-      </div>
-    </div>
-
-    <div class="dish-card">
-      <div class="dish-photo">
-        <img src="brand_assets/Mike%27s%20Noodle%20House%20Pictures/IMG_3581.jpg" alt="雲吞魚蛋麵">
-      </div>
-      <div class="dish-info">
-        <div class="dish-names">
-          <span class="dish-zh">雲吞魚蛋麵</span>
-          <span class="dish-price">from $12</span>
-        </div>
-        <span class="dish-en">Wonton & Fish Ball Noodle</span>
-        <p class="dish-desc">The best of both worlds — handmade wontons and fish balls together in a single bowl. A popular combination for regulars.</p>
-      </div>
-    </div>
-
-    <div class="dish-card">
-      <div class="dish-photo">
-        <img src="brand_assets/Mike%27s%20Noodle%20House%20Pictures/IMG_4986.jpg" alt="墨魚丸麵">
-      </div>
-      <div class="dish-info">
-        <div class="dish-names">
-          <span class="dish-zh">墨魚丸麵</span>
-          <span class="dish-price">from $11</span>
-        </div>
-        <span class="dish-en">Squid Ball Noodle Soup</span>
-        <p class="dish-desc">Chewy, toothsome squid balls with a distinct oceanic flavor, served in clear broth with egg noodles or flat rice noodles.</p>
+    <div class="highlight-card">
+      <img src="brand_assets/IMG_4934.jpg" alt="魚蛋麵">
+      <div class="highlight-overlay"></div>
+      <div class="highlight-label">
+        <span class="highlight-tag">Classic</span>
+        <span class="highlight-zh">魚蛋麵</span>
+        <span class="highlight-en">Fish Ball Noodle</span>
       </div>
     </div>
 
@@ -930,89 +810,35 @@
     </p>
   </div>
 
-  <div class="dishes-grid">
+  <div class="highlights-layout right-heavy">
 
-    <div class="dish-card">
-      <div class="dish-photo">
-        <img src="brand_assets/Mike%27s%20Noodle%20House%20Pictures/IMG_3535.jpg" alt="白粥">
-      </div>
-      <div class="dish-info">
-        <div class="dish-names">
-          <span class="dish-zh">白粥</span>
-          <span class="dish-price">from $14</span>
-        </div>
-        <span class="dish-en">Plain Congee</span>
-        <p class="dish-desc">Pure silky rice porridge, plain and clean. The perfect base — often paired with youtiao or a side dish. Mild, soothing, and deeply comforting.</p>
+    <div class="highlight-card">
+      <img src="brand_assets/Mike%27s%20Noodle%20House%20Pictures/IMG_3535.jpg" alt="白粥">
+      <div class="highlight-overlay"></div>
+      <div class="highlight-label">
+        <span class="highlight-tag">Classic</span>
+        <span class="highlight-zh">白粥</span>
+        <span class="highlight-en">Plain Congee</span>
       </div>
     </div>
 
-    <div class="dish-card">
-      <div class="dish-photo">
-        <img src="https://images.unsplash.com/photo-1547592166-23ac45744acd?w=440&h=330&fit=crop&auto=format&q=80" alt="及第粥">
-      </div>
-      <div class="dish-info">
-        <div class="dish-names">
-          <span class="dish-zh">及第粥</span>
-          <span class="dish-price">from $14</span>
-        </div>
-        <span class="dish-en">Mixed Pork Congee</span>
-        <p class="dish-desc">A traditional Hong Kong classic. Pork liver, lean pork, and intestines cooked directly in the congee — earthy, rich, and deeply savory.</p>
+    <div class="highlight-card">
+      <img src="brand_assets/IMG_4931.jpg" alt="牛肉粥">
+      <div class="highlight-overlay"></div>
+      <div class="highlight-label">
+        <span class="highlight-tag">Popular</span>
+        <span class="highlight-zh">牛肉粥</span>
+        <span class="highlight-en">Beef Congee</span>
       </div>
     </div>
 
-    <div class="dish-card">
-      <div class="dish-photo">
-        <img src="https://images.unsplash.com/photo-1766761562530-c8dd12c96d9a?w=440&h=330&fit=crop&auto=format&q=80" alt="牛肉粥">
-      </div>
-      <div class="dish-info">
-        <div class="dish-names">
-          <span class="dish-zh">牛肉粥</span>
-          <span class="dish-price">from $14</span>
-        </div>
-        <span class="dish-en">Beef Congee</span>
-        <p class="dish-desc">Tender slices of fresh beef, cooked just right in hot silky porridge. Garnished with ginger and green onion. Clean and satisfying.</p>
-      </div>
-    </div>
-
-    <div class="dish-card">
-      <div class="dish-photo">
-        <img src="https://images.unsplash.com/photo-1547592166-23ac45744acd?w=440&h=330&fit=crop&auto=format&q=80" alt="皮蛋瘦肉粥">
-      </div>
-      <div class="dish-info">
-        <div class="dish-names">
-          <span class="dish-zh">皮蛋瘦肉粥</span>
-          <span class="dish-price">from $14</span>
-        </div>
-        <span class="dish-en">Century Egg & Pork Congee</span>
-        <p class="dish-desc">One of the most iconic Cantonese congees. Dark, creamy century egg adds depth and umami to silky porridge with lean pork — a must-try for first-timers.</p>
-      </div>
-    </div>
-
-    <div class="dish-card">
-      <div class="dish-photo">
-        <img src="https://images.unsplash.com/photo-1766761562530-c8dd12c96d9a?w=440&h=330&fit=crop&auto=format&q=80" alt="豬潤粥">
-      </div>
-      <div class="dish-info">
-        <div class="dish-names">
-          <span class="dish-zh">豬潤粥</span>
-          <span class="dish-price">from $14</span>
-        </div>
-        <span class="dish-en">Pork Liver Congee</span>
-        <p class="dish-desc">Thinly sliced pork liver with a silky, just-cooked texture in smooth congee. Savory and slightly rich — a traditional HK breakfast staple.</p>
-      </div>
-    </div>
-
-    <div class="dish-card">
-      <div class="dish-photo">
-        <img src="https://images.unsplash.com/photo-1547592166-23ac45744acd?w=440&h=330&fit=crop&auto=format&q=80" alt="魚片粥">
-      </div>
-      <div class="dish-info">
-        <div class="dish-names">
-          <span class="dish-zh">魚片粥</span>
-          <span class="dish-price">from $14</span>
-        </div>
-        <span class="dish-en">Fish Fillet Congee</span>
-        <p class="dish-desc">Fresh fish slices, delicately poached in hot congee. Light and clean-flavored — one of the most popular choices for those new to Cantonese congee.</p>
+    <div class="highlight-card span-rows">
+      <img src="brand_assets/IMG_4940.jpg" alt="及第粥">
+      <div class="highlight-overlay"></div>
+      <div class="highlight-label">
+        <span class="highlight-tag">Traditional</span>
+        <span class="highlight-zh">及第粥</span>
+        <span class="highlight-en">Mixed Pork Congee</span>
       </div>
     </div>
 
@@ -1038,38 +864,35 @@
     </p>
   </div>
 
-  <div class="sides-grid">
+  <div class="highlights-layout three-equal">
 
-    <div class="side-card">
-      <div class="side-photo">
-        <img src="https://images.unsplash.com/photo-1555126634-323283e090fa?w=180&h=180&fit=crop&auto=format&q=80" alt="油條">
-      </div>
-      <div class="side-info">
-        <span class="side-zh">油條</span>
-        <span class="side-en">Youtiao · Fried Dough Stick</span>
-        <p class="side-desc">Golden, crispy-outside, airy-inside fried dough. The classic congee companion — tear it apart and dip into your porridge.</p>
+    <div class="highlight-card">
+      <img src="brand_assets/youtiao.jpeg" alt="油條">
+      <div class="highlight-overlay"></div>
+      <div class="highlight-label">
+        <span class="highlight-tag">Must Try</span>
+        <span class="highlight-zh">油條</span>
+        <span class="highlight-en">Fried Dough Stick</span>
       </div>
     </div>
 
-    <div class="side-card">
-      <div class="side-photo">
-        <img src="brand_assets/Mike%27s%20Noodle%20House%20Pictures/greens-side.jpg" alt="各式小菜">
-      </div>
-      <div class="side-info">
-        <span class="side-zh">各式小菜</span>
-        <span class="side-en">Various Sides</span>
-        <p class="side-desc">A rotating selection of Cantonese sides. Ask your server today or check our printed menu at the counter for current offerings.</p>
+    <div class="highlight-card">
+      <img src="brand_assets/Mike%27s%20Noodle%20House%20Pictures/greens-side.jpg" alt="各式小菜">
+      <div class="highlight-overlay"></div>
+      <div class="highlight-label">
+        <span class="highlight-tag">Seasonal</span>
+        <span class="highlight-zh">各式小菜</span>
+        <span class="highlight-en">Daily Sides</span>
       </div>
     </div>
 
-    <div class="side-card">
-      <div class="side-photo">
-        <img src="https://images.unsplash.com/photo-1583475020831-fb4fbb497315?w=180&h=180&fit=crop&auto=format&q=80" alt="飲料">
-      </div>
-      <div class="side-info">
-        <span class="side-zh">飲料</span>
-        <span class="side-en">Drinks</span>
-        <p class="side-desc">Coca-Cola and hot or iced tea available. Simple, classic pairings for a traditional meal.</p>
+    <div class="highlight-card">
+      <img src="brand_assets/soy milk.jpg" alt="飲料">
+      <div class="highlight-overlay"></div>
+      <div class="highlight-label">
+        <span class="highlight-tag">Drinks</span>
+        <span class="highlight-zh">豆漿</span>
+        <span class="highlight-en">Soy Milk & More</span>
       </div>
     </div>
 
@@ -1087,13 +910,15 @@
 
   <div class="ref-grid">
     <div class="ref-img-frame">
-      <div class="scan-landscape-from-portrait">
-        <img src="brand_assets/MIke%27s%20Noodle%20House%20Menu%20page%201.jpg" alt="Menu Page 1 — Noodle, Soup & Dish Noodle">
+      <div class="ref-img-wrap">
+        <img src="brand_assets/MIke%27s%20Noodle%20House%20Menu%20page%201.jpg" alt="Menu Page 1 — Noodle, Soup & Dish Noodle" class="portrait-ccw">
       </div>
       <p class="ref-caption">麵 · 湯 · 碗 — Noodle, Soup &amp; Dish Noodle</p>
     </div>
     <div class="ref-img-frame">
-      <img src="brand_assets/DSCF0057.JPG" alt="Menu Page 2 — Congee, Sides & Drinks">
+      <div class="ref-img-wrap">
+        <img src="brand_assets/DSCF0057.JPG" alt="Menu Page 2 — Congee, Sides & Drinks">
+      </div>
       <p class="ref-caption">粥類 · 小菜 · 飲料 — Congee, Sides &amp; Drinks</p>
     </div>
   </div>
@@ -1185,9 +1010,9 @@
       scrollTrigger: { trigger: id, start: 'top 80%' },
       opacity: 0, y: 24, stagger: 0.09, duration: 0.75, ease: 'power3.out'
     });
-    gsap.from(`${id} .dish-card, ${id} .side-card`, {
-      scrollTrigger: { trigger: `${id} .dishes-grid, ${id} .sides-grid`, start: 'top 84%' },
-      opacity: 0, y: 44, scale: 0.97, stagger: 0.1, duration: 0.85, ease: 'back.out(1.2)'
+    gsap.from(`${id} .highlight-card`, {
+      scrollTrigger: { trigger: `${id} .highlights-layout`, start: 'top 84%' },
+      opacity: 0, y: 36, scale: 0.97, stagger: 0.12, duration: 0.9, ease: 'back.out(1.15)'
     });
   });
 
@@ -1224,21 +1049,12 @@
 <script type="module">
 import { animate, spring } from 'https://cdn.jsdelivr.net/npm/motion@10.18.2/+esm';
 
-document.querySelectorAll('.dish-card').forEach(card => {
+document.querySelectorAll('.highlight-card').forEach(card => {
   card.addEventListener('mouseenter', () =>
-    animate(card, { y: -7 }, { easing: spring({ stiffness: 300, damping: 18 }) })
+    animate(card, { scale: 1.012 }, { easing: spring({ stiffness: 280, damping: 20 }) })
   );
   card.addEventListener('mouseleave', () =>
-    animate(card, { y: 0 }, { easing: spring({ stiffness: 300, damping: 24 }) })
-  );
-});
-
-document.querySelectorAll('.side-card').forEach(card => {
-  card.addEventListener('mouseenter', () =>
-    animate(card, { x: 5 }, { easing: spring({ stiffness: 320, damping: 20 }) })
-  );
-  card.addEventListener('mouseleave', () =>
-    animate(card, { x: 0 }, { easing: spring({ stiffness: 300, damping: 24 }) })
+    animate(card, { scale: 1 }, { easing: spring({ stiffness: 300, damping: 26 }) })
   );
 });
 
