@@ -82,7 +82,7 @@
     .nav-link:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
 
     .nav-logo img {
-      height: 34px;
+      height: 44px;
       width: auto;
       display: block;
     }
@@ -426,6 +426,108 @@
 
     .menu-ring:hover .menu-ring-inner img {
       filter: sepia(0%) contrast(1.08) brightness(0.98);
+    }
+
+    /* ── PILLARS SECTION ── */
+    .pillars-section {
+      background: var(--paper-alt);
+      border-top: 3px solid var(--red);
+      border-bottom: 3px solid var(--red);
+      padding: 72px 80px;
+      position: relative;
+    }
+
+    .pillars-section::before {
+      content: '';
+      position: absolute;
+      top: 7px; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold-lt), transparent);
+    }
+
+    .pillars-section::after {
+      content: '';
+      position: absolute;
+      bottom: 7px; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold-lt), transparent);
+    }
+
+    .pillars-inner {
+      display: flex;
+      align-items: flex-start;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .pillar {
+      flex: 1;
+      padding: 0 40px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .pillar-num {
+      font-family: 'Noto Serif SC', serif;
+      font-size: 92px;
+      font-weight: 900;
+      color: rgba(193,37,24,0.055);
+      line-height: 1;
+      position: absolute;
+      top: -14px;
+      right: 28px;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .pillar-zh {
+      font-family: 'Noto Serif SC', serif;
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--ink);
+      letter-spacing: 0.07em;
+      line-height: 1.2;
+      margin-bottom: 10px;
+    }
+
+    .pillar-rule {
+      display: block;
+      width: 28px;
+      height: 2px;
+      background: var(--red);
+      margin-bottom: 11px;
+    }
+
+    .pillar-en {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 15px;
+      font-style: italic;
+      color: var(--ink-lt);
+      letter-spacing: 0.03em;
+      margin-bottom: 18px;
+    }
+
+    .pillar-desc {
+      font-size: 13.5px;
+      color: var(--ink-mid);
+      line-height: 2.0;
+      letter-spacing: 0.02em;
+    }
+
+    .pillar-sep {
+      width: 1px;
+      height: 180px;
+      background: linear-gradient(to bottom, transparent, rgba(180,130,40,0.32) 30%, rgba(180,130,40,0.32) 70%, transparent);
+      flex-shrink: 0;
+      margin-top: 18px;
+    }
+
+    .pillars-cta {
+      text-align: center;
+      margin-top: 56px;
+      padding-top: 44px;
+      border-top: 1px solid rgba(180,130,40,0.22);
     }
 
     /* ── MENU CTA ── */
@@ -1138,7 +1240,7 @@
       margin-bottom: 20px;
     }
 
-    .footer-logo img { height: 38px; width: auto; display: block; }
+    .footer-logo img { height: 48px; width: auto; display: block; }
 
     .footer-brand-text {
       font-size: 12px;
@@ -1214,79 +1316,141 @@
 
     /* ── ATMOSPHERE GALLERY ── */
     .gallery-section {
-      padding: 80px;
+      padding: 72px 0;
       background: var(--paper);
+      overflow: hidden;
     }
 
     .gallery-header {
       text-align: center;
-      margin-bottom: 44px;
+      margin-bottom: 40px;
+      padding: 0 80px;
     }
 
-    .gallery-strip {
-      display: grid;
-      grid-template-columns: 1fr 1.42fr 1fr;
-      gap: 16px;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .gallery-cell {
-      position: relative;
-      overflow: hidden;
+    .gallery-marquee-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
       cursor: default;
     }
 
-    .gallery-cell--side { height: 320px; }
-    .gallery-cell--center { height: 420px; }
+    .gallery-track {
+      display: flex;
+      gap: 6px;
+      width: max-content;
+      will-change: transform;
+    }
 
-    .gallery-cell img {
+    .gallery-track--fwd {
+      animation: gallery-fwd 52s linear infinite;
+    }
+
+    .gallery-track--rev {
+      animation: gallery-rev 64s linear infinite;
+    }
+
+    .gallery-marquee-wrap:hover .gallery-track {
+      animation-play-state: paused;
+    }
+
+    @keyframes gallery-fwd {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    @keyframes gallery-rev {
+      from { transform: translateX(-50%); }
+      to   { transform: translateX(0); }
+    }
+
+    .gallery-item {
+      position: relative;
+      flex-shrink: 0;
+      width: 340px;
+      height: 240px;
+      overflow: hidden;
+    }
+
+    .gallery-item img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       object-position: center;
-      filter: sepia(14%) contrast(1.04) brightness(0.88) saturate(0.85);
-      transform: scale(1.04);
+      filter: sepia(14%) contrast(1.04) brightness(0.86) saturate(0.82);
+      transform: scale(1.05);
       transition: transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94), filter 0.5s ease;
       will-change: transform;
     }
 
-    .gallery-cell:hover img {
+    .gallery-item:hover img {
       transform: scale(1);
-      filter: sepia(4%) contrast(1.06) brightness(0.93) saturate(0.95);
+      filter: sepia(3%) contrast(1.07) brightness(0.95) saturate(0.98);
     }
 
-    .gallery-cell::after {
-      content: '';
+    .gallery-item-overlay {
       position: absolute;
       inset: 0;
       background:
-        linear-gradient(to top, rgba(28,14,7,0.52) 0%, transparent 55%),
-        linear-gradient(to bottom, rgba(28,14,7,0.18) 0%, transparent 40%);
+        linear-gradient(to top, rgba(28,14,7,0.84) 0%, rgba(28,14,7,0.08) 55%, transparent 80%),
+        linear-gradient(to bottom, rgba(28,14,7,0.16) 0%, transparent 30%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
       pointer-events: none;
-      transition: opacity 0.5s ease;
     }
 
-    .gallery-cell:hover::after { opacity: 0.7; }
+    .gallery-item:hover .gallery-item-overlay {
+      opacity: 1;
+    }
 
-    .gallery-cell-caption {
+    .gallery-item-caption {
       position: absolute;
-      bottom: 18px;
-      left: 20px;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 16px 16px 14px;
       z-index: 2;
-      color: rgba(247,235,200,0.82);
-      font-size: 10px;
-      letter-spacing: 0.42em;
-      text-transform: uppercase;
-      font-family: 'Noto Sans SC', sans-serif;
+      transform: translateY(10px);
+      opacity: 0;
+      transition: transform 0.38s cubic-bezier(0.25,0.46,0.45,0.94), opacity 0.35s ease;
+      pointer-events: none;
+    }
+
+    .gallery-item:hover .gallery-item-caption {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .gallery-caption-zh {
+      font-family: 'Noto Serif SC', serif;
+      font-size: 13px;
+      font-weight: 700;
+      color: rgba(247,235,200,0.95);
+      letter-spacing: 0.08em;
+      display: block;
+      line-height: 1.3;
+    }
+
+    .gallery-caption-en {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 12px;
+      color: rgba(247,235,200,0.65);
+      letter-spacing: 0.03em;
+      display: block;
+      margin-top: 3px;
     }
 
     .gallery-frame-line {
       position: absolute;
-      inset: 8px;
-      border: 1px solid rgba(247,235,200,0.12);
+      inset: 7px;
+      border: 1px solid rgba(247,235,200,0);
       pointer-events: none;
       z-index: 3;
+      transition: border-color 0.4s ease;
+    }
+
+    .gallery-item:hover .gallery-frame-line {
+      border-color: rgba(247,235,200,0.22);
     }
 
     /* ── REVIEWS SCORE ROW ── */
@@ -1439,54 +1603,41 @@
   <span class="trad-banner-text">每日供應 · Open Daily</span>
 </div>
 
-<!-- ── MENU SECTION ── -->
-<section class="menu-section" id="menu">
-  <div class="menu-header">
-    <span class="menu-eyebrow">Our Menu · 菜單精選</span>
-    <h2 class="menu-title-zh">招牌菜式</h2>
-    <p class="menu-title-en">Signature Dishes of 全記麵家</p>
+<!-- ── WHY MIKE'S PILLARS ── -->
+<section class="pillars-section" id="menu">
+  <div class="pillars-inner">
+
+    <div class="pillar">
+      <div class="pillar-num">壹</div>
+      <span class="pillar-zh">手工製作</span>
+      <span class="pillar-rule"></span>
+      <span class="pillar-en">Handmade Daily</span>
+      <p class="pillar-desc">Every wonton folded by hand. Broth simmered overnight from pork bones. Noodles pressed fresh each morning before we open the door.</p>
+    </div>
+
+    <div class="pillar-sep"></div>
+
+    <div class="pillar">
+      <div class="pillar-num">貳</div>
+      <span class="pillar-zh">四十年傳統</span>
+      <span class="pillar-rule"></span>
+      <span class="pillar-en">40 Years of Craft</span>
+      <p class="pillar-desc">Since 1986, the same recipe, the same kitchen, the same honest bowl — untouched by trend or shortcut. Some things should never change.</p>
+    </div>
+
+    <div class="pillar-sep"></div>
+
+    <div class="pillar">
+      <div class="pillar-num">叄</div>
+      <span class="pillar-zh">正宗港式</span>
+      <span class="pillar-rule"></span>
+      <span class="pillar-en">Authentic Hong Kong Style</span>
+      <p class="pillar-desc">Rooted in the cha chaan teng tradition of old Hong Kong. Brought across the Pacific and preserved, unchanged, in Seattle's International District.</p>
+    </div>
+
   </div>
 
-  <div class="menu-row">
-    <div class="menu-item">
-      <div class="menu-ring" tabindex="0" role="button" aria-label="牛腩雲吞麵">
-        <div class="menu-ring-inner">
-          <img src="brand_assets/beef brisket noodle with wonton.jpeg" alt="牛腩雲吞麵" loading="lazy">
-        </div>
-        <div class="menu-num">一</div>
-      </div>
-      <span class="menu-label-zh">牛腩雲吞麵</span>
-      <span class="menu-label-en">Beef Brisket & Wonton Noodle</span>
-    </div>
-
-    <div class="menu-sep"></div>
-
-    <div class="menu-item">
-      <div class="menu-ring" tabindex="0" role="button" aria-label="油條">
-        <div class="menu-ring-inner">
-          <img src="brand_assets/youtiao.jpeg" alt="油條" loading="lazy">
-        </div>
-        <div class="menu-num">二</div>
-      </div>
-      <span class="menu-label-zh">油條</span>
-      <span class="menu-label-en">Chinese Fried Dough</span>
-    </div>
-
-    <div class="menu-sep"></div>
-
-    <div class="menu-item">
-      <div class="menu-ring" tabindex="0" role="button" aria-label="豆漿">
-        <div class="menu-ring-inner">
-          <img src="brand_assets/soy milk.jpg" alt="豆漿" loading="lazy">
-        </div>
-        <div class="menu-num">三</div>
-      </div>
-      <span class="menu-label-zh">豆漿</span>
-      <span class="menu-label-en">Fresh Soy Milk</span>
-    </div>
-  </div>
-
-  <div class="menu-cta">
+  <div class="pillars-cta">
     <span class="menu-cta-eyebrow">不知道點什麼？· Not sure what to order?</span>
     <a href="menu.html" class="menu-cta-btn">
       <span class="menu-cta-zh">菜單照片</span>
@@ -1505,22 +1656,42 @@
     <p class="menu-title-en">Crafted fresh, every morning</p>
   </div>
 
-  <div class="gallery-strip">
-    <div class="gallery-cell gallery-cell--side">
-      <img src="brand_assets/IMG_4929.jpg" alt="乾麵 — Dry Noodle">
-      <div class="gallery-frame-line"></div>
-      <span class="gallery-cell-caption">乾麵 · Dry Style</span>
+  <div class="gallery-marquee-wrap">
+
+    <!-- Track 1: left-scrolling (set duplicated for seamless loop) -->
+    <div class="gallery-track gallery-track--fwd">
+      <div class="gallery-item"><img src="brand_assets/Mike%27s%20Noodle%20House%20Pictures/IMG_3538.jpg" alt="云吞面" loading="lazy"><div class="gallery-item-overlay"></div><div class="gallery-item-caption"><span class="gallery-caption-zh">云吞面</span><span class="gallery-caption-en">Wonton Noodle Soup</span></div><div class="gallery-frame-line"></div></div>
+      <div class="gallery-item"><img src="brand_assets/Mike%27s%20Noodle%20House%20Pictures/IMG_3560.jpg" alt="云吞牛腩面" loading="lazy"><div class="gallery-item-overlay"></div><div class="gallery-item-caption"><span class="gallery-caption-zh">云吞牛腩面</span><span class="gallery-caption-en">Wonton &amp; Beef Brisket Noodle Soup</span></div><div class="gallery-frame-line"></div></div>
+      <div class="gallery-item"><img src="brand_assets/IMG_4931.jpg" alt="牛腩面" loading="lazy"><div class="gallery-item-overlay"></div><div class="gallery-item-caption"><span class="gallery-caption-zh">牛腩面</span><span class="gallery-caption-en">Beef Brisket Noodle Soup</span></div><div class="gallery-frame-line"></div></div>
+      <div class="gallery-item"><img src="brand_assets/Mike%27s%20Noodle%20House%20Pictures/IMG_3581.jpg" alt="牛腩捞面加水饺" loading="lazy"><div class="gallery-item-overlay"></div><div class="gallery-item-caption"><span class="gallery-caption-zh">牛腩捞面加水饺</span><span class="gallery-caption-en">Brisket Noodle, Extra Sui-kau</span></div><div class="gallery-frame-line"></div></div>
+      <div class="gallery-item"><img src="brand_assets/beef%20brisket%20noodle%20with%20wonton.jpg" alt="牛腩捞面加云吞" loading="lazy"><div class="gallery-item-overlay"></div><div class="gallery-item-caption"><span class="gallery-caption-zh">牛腩捞面加云吞</span><span class="gallery-caption-en">Brisket Noodle, Extra Wonton</span></div><div class="gallery-frame-line"></div></div>
+      <div class="gallery-item"><img src="brand_assets/IMG_4934.jpg" alt="云吞水饺面" loading="lazy"><div class="gallery-item-overlay"></div><div class="gallery-item-caption"><span class="gallery-caption-zh">云吞水饺面</span><span class="gallery-caption-en">Wonton &amp; Sui-kau Noodle Soup</span></div><div class="gallery-frame-line"></div></div>
+      <!-- Set B (duplicate for infinite loop) -->
+      <div class="gallery-item"><img src="brand_assets/Mike%27s%20Noodle%20House%20Pictures/IMG_3538.jpg" alt="云吞面" loading="lazy"><div class="gallery-item-overlay"></div><div class="gallery-item-caption"><span class="gallery-caption-zh">云吞面</span><span class="gallery-caption-en">Wonton Noodle Soup</span></div><div class="gallery-frame-line"></div></div>
+      <div class="gallery-item"><img src="brand_assets/Mike%27s%20Noodle%20House%20Pictures/IMG_3560.jpg" alt="云吞牛腩面" loading="lazy"><div class="gallery-item-overlay"></div><div class="gallery-item-caption"><span class="gallery-caption-zh">云吞牛腩面</span><span class="gallery-caption-en">Wonton &amp; Beef Brisket Noodle Soup</span></div><div class="gallery-frame-line"></div></div>
+      <div class="gallery-item"><img src="brand_assets/IMG_4931.jpg" alt="牛腩面" loading="lazy"><div class="gallery-item-overlay"></div><div class="gallery-item-caption"><span class="gallery-caption-zh">牛腩面</span><span class="gallery-caption-en">Beef Brisket Noodle Soup</span></div><div class="gallery-frame-line"></div></div>
+      <div class="gallery-item"><img src="brand_assets/Mike%27s%20Noodle%20House%20Pictures/IMG_3581.jpg" alt="牛腩捞面加水饺" loading="lazy"><div class="gallery-item-overlay"></div><div class="gallery-item-caption"><span class="gallery-caption-zh">牛腩捞面加水饺</span><span class="gallery-caption-en">Brisket Noodle, Extra Sui-kau</span></div><div class="gallery-frame-line"></div></div>
+      <div class="gallery-item"><img src="brand_assets/beef%20brisket%20noodle%20with%20wonton.jpg" alt="牛腩捞面加云吞" loading="lazy"><div class="gallery-item-overlay"></div><div class="gallery-item-caption"><span class="gallery-caption-zh">牛腩捞面加云吞</span><span class="gallery-caption-en">Brisket Noodle, Extra Wonton</span></div><div class="gallery-frame-line"></div></div>
+      <div class="gallery-item"><img src="brand_assets/IMG_4934.jpg" alt="云吞水饺面" loading="lazy"><div class="gallery-item-overlay"></div><div class="gallery-item-caption"><span class="gallery-caption-zh">云吞水饺面</span><span class="gallery-caption-en">Wonton &amp; Sui-kau Noodle Soup</span></div><div class="gallery-frame-line"></div></div>
     </div>
-    <div class="gallery-cell gallery-cell--center">
-      <img src="brand_assets/IMG_4931.jpg" alt="牛腩 — Beef Brisket">
-      <div class="gallery-frame-line"></div>
-      <span class="gallery-cell-caption">牛腩 · Braised Brisket</span>
+
+    <!-- Track 2: right-scrolling (set duplicated for seamless loop) -->
+    <div class="gallery-track gallery-track--rev">
+      <div class="gallery-item"><img src="brand_assets/Mike%27s%20Noodle%20House%20Pictures/IMG_3535.jpg" alt="荔湾艇仔粥" loading="lazy"><div class="gallery-item-overlay"></div><div class="gallery-item-caption"><span class="gallery-caption-zh">荔湾艇仔粥</span><span class="gallery-caption-en">Sam-pan Congee</span></div><div class="gallery-frame-line"></div></div>
+      <div class="gallery-item"><img src="brand_assets/unnamed%20(1).jpg" alt="自制鱼滑鱼饼" loading="lazy"><div class="gallery-item-overlay"></div><div class="gallery-item-caption"><span class="gallery-caption-zh">自制鱼滑鱼饼</span><span class="gallery-caption-en">Homemade Fish Ball &amp; Fish Cake</span></div><div class="gallery-frame-line"></div></div>
+      <div class="gallery-item"><img src="brand_assets/IMG_3563.jpg" alt="白灼腰肝牛百叶" loading="lazy"><div class="gallery-item-overlay"></div><div class="gallery-item-caption"><span class="gallery-caption-zh">白灼腰肝牛百叶</span><span class="gallery-caption-en">Steamed Pork Liver, Kidney &amp; Tripes</span></div><div class="gallery-frame-line"></div></div>
+      <div class="gallery-item"><img src="brand_assets/IMG_4940.jpg" alt="云吞水饺" loading="lazy"><div class="gallery-item-overlay"></div><div class="gallery-item-caption"><span class="gallery-caption-zh">云吞水饺</span><span class="gallery-caption-en">Wonton &amp; Sui-kau in Broth</span></div><div class="gallery-frame-line"></div></div>
+      <div class="gallery-item"><img src="brand_assets/IMG_4929.jpg" alt="牛腩撈麵" loading="lazy"><div class="gallery-item-overlay"></div><div class="gallery-item-caption"><span class="gallery-caption-zh">牛腩撈麵</span><span class="gallery-caption-en">Beef Brisket Dry Noodle</span></div><div class="gallery-frame-line"></div></div>
+      <div class="gallery-item"><img src="brand_assets/youtiao.jpg" alt="油條" loading="lazy"><div class="gallery-item-overlay"></div><div class="gallery-item-caption"><span class="gallery-caption-zh">油條</span><span class="gallery-caption-en">Chinese Fried Dough</span></div><div class="gallery-frame-line"></div></div>
+      <!-- Set B (duplicate for infinite loop) -->
+      <div class="gallery-item"><img src="brand_assets/Mike%27s%20Noodle%20House%20Pictures/IMG_3535.jpg" alt="荔湾艇仔粥" loading="lazy"><div class="gallery-item-overlay"></div><div class="gallery-item-caption"><span class="gallery-caption-zh">荔湾艇仔粥</span><span class="gallery-caption-en">Sam-pan Congee</span></div><div class="gallery-frame-line"></div></div>
+      <div class="gallery-item"><img src="brand_assets/unnamed%20(1).jpg" alt="自制鱼滑鱼饼" loading="lazy"><div class="gallery-item-overlay"></div><div class="gallery-item-caption"><span class="gallery-caption-zh">自制鱼滑鱼饼</span><span class="gallery-caption-en">Homemade Fish Ball &amp; Fish Cake</span></div><div class="gallery-frame-line"></div></div>
+      <div class="gallery-item"><img src="brand_assets/IMG_3563.jpg" alt="白灼腰肝牛百叶" loading="lazy"><div class="gallery-item-overlay"></div><div class="gallery-item-caption"><span class="gallery-caption-zh">白灼腰肝牛百叶</span><span class="gallery-caption-en">Steamed Pork Liver, Kidney &amp; Tripes</span></div><div class="gallery-frame-line"></div></div>
+      <div class="gallery-item"><img src="brand_assets/IMG_4940.jpg" alt="云吞水饺" loading="lazy"><div class="gallery-item-overlay"></div><div class="gallery-item-caption"><span class="gallery-caption-zh">云吞水饺</span><span class="gallery-caption-en">Wonton &amp; Sui-kau in Broth</span></div><div class="gallery-frame-line"></div></div>
+      <div class="gallery-item"><img src="brand_assets/IMG_4929.jpg" alt="牛腩撈麵" loading="lazy"><div class="gallery-item-overlay"></div><div class="gallery-item-caption"><span class="gallery-caption-zh">牛腩撈麵</span><span class="gallery-caption-en">Beef Brisket Dry Noodle</span></div><div class="gallery-frame-line"></div></div>
+      <div class="gallery-item"><img src="brand_assets/youtiao.jpg" alt="油條" loading="lazy"><div class="gallery-item-overlay"></div><div class="gallery-item-caption"><span class="gallery-caption-zh">油條</span><span class="gallery-caption-en">Chinese Fried Dough</span></div><div class="gallery-frame-line"></div></div>
     </div>
-    <div class="gallery-cell gallery-cell--side">
-      <img src="brand_assets/IMG_4934.jpg" alt="雲吞 — Wonton Noodle">
-      <div class="gallery-frame-line"></div>
-      <span class="gallery-cell-caption">雲吞 · Wonton Soup</span>
-    </div>
+
   </div>
 </section>
 
@@ -1708,8 +1879,8 @@
         <p class="footer-col-head">About Us</p>
         <ul class="footer-links">
           <li><a href="about.html" class="footer-link">Our Story</a></li>
-          <li><a href="about.html" class="footer-link">Founder</a></li>
-          <li><a href="about.html" class="footer-link">Our Craft</a></li>
+          <li><a href="about.html#founder" class="footer-link">Founder</a></li>
+          <li><a href="about.html#craft" class="footer-link">Our Craft</a></li>
         </ul>
       </div>
       <div>
@@ -1733,8 +1904,8 @@
         <p class="footer-col-head">Contact</p>
         <ul class="footer-links">
           <li><a href="tel:+12063897099" class="footer-link">(206) 389-7099</a></li>
-          <li><a href="#" class="footer-link">418 Maynard Ave S</a></li>
-          <li><a href="#" class="footer-link">Seattle, WA 98104</a></li>
+          <li><a href="https://maps.google.com/maps?q=418+Maynard+Ave+S,+Seattle,+WA+98104" target="_blank" rel="noopener" class="footer-link">418 Maynard Ave S</a></li>
+          <li><a href="https://maps.google.com/maps?q=418+Maynard+Ave+S,+Seattle,+WA+98104" target="_blank" rel="noopener" class="footer-link">Seattle, WA 98104</a></li>
         </ul>
       </div>
     </div>
@@ -1782,18 +1953,18 @@
     opacity: 0, stagger: 0.07, duration: 0.5, ease: 'power2.out'
   });
 
-  /* ── MENU (consolidated into one trigger) ── */
-  gsap.from('.menu-header > *', {
-    scrollTrigger: st('.menu-section', 'top 80%'),
-    opacity: 0, y: 22, stagger: 0.1, duration: 0.75, ease: 'power3.out'
+  /* ── PILLARS ── */
+  gsap.from('.pillar', {
+    scrollTrigger: st('.pillars-section', 'top 80%'),
+    opacity: 0, y: 36, stagger: 0.14, duration: 0.9, ease: 'power3.out'
   });
-  gsap.from('.menu-item', {
-    scrollTrigger: st('.menu-row'),
-    opacity: 0, y: 48, stagger: 0.12, duration: 0.9, ease: 'power3.out'
+  gsap.from('.pillar-sep', {
+    scrollTrigger: st('.pillars-section', 'top 80%'),
+    opacity: 0, scaleY: 0, transformOrigin: 'top center', stagger: 0.14, duration: 0.7, ease: 'power2.inOut'
   });
-  gsap.from('.menu-cta', {
-    scrollTrigger: st('.menu-cta', 'top 88%'),
-    opacity: 0, y: 28, duration: 0.8, ease: 'power3.out'
+  gsap.from('.pillars-cta', {
+    scrollTrigger: st('.pillars-cta', 'top 88%'),
+    opacity: 0, y: 24, duration: 0.8, ease: 'power3.out'
   });
 
   /* ── GALLERY ── */
@@ -1801,9 +1972,9 @@
     scrollTrigger: st('.gallery-section', 'top 80%'),
     opacity: 0, y: 22, stagger: 0.1, duration: 0.75, ease: 'power3.out'
   });
-  gsap.from('.gallery-cell', {
-    scrollTrigger: st('.gallery-strip', 'top 84%'),
-    opacity: 0, y: 44, stagger: 0.14, duration: 0.9, ease: 'power3.out'
+  gsap.from('.gallery-track', {
+    scrollTrigger: st('.gallery-marquee-wrap', 'top 90%'),
+    opacity: 0, duration: 0.9, ease: 'power2.out', stagger: 0.18
   });
 
   /* ── STORY ── */
