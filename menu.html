@@ -88,6 +88,63 @@
       display: block;
     }
 
+    .nav-hamburger {
+      display: none;
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px 4px;
+      z-index: 10;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--ink-mid);
+      transform-origin: center;
+      transition: transform 0.25s ease, opacity 0.25s ease;
+    }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .nav-mobile-menu {
+      display: none;
+      position: fixed;
+      top: 52px; left: 0; right: 0;
+      background: var(--paper);
+      border-bottom: 2px solid var(--red);
+      z-index: 998;
+      transform: translateY(-6px);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 0.22s ease, opacity 0.22s ease;
+    }
+    .nav-mobile-menu.open {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .nav-mobile-link {
+      display: block;
+      padding: 16px 24px;
+      font-size: 14px;
+      color: var(--ink-mid);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+      transition: color 0.2s ease, background 0.2s ease;
+    }
+    .nav-mobile-link:last-child { border-bottom: none; }
+    .nav-mobile-link:hover { color: var(--red); background: rgba(0,0,0,0.02); }
+    .nav-mobile-link.active { color: var(--red); }
+
     /* ── MENU HERO ── */
     .menu-hero {
       margin-top: 52px;
@@ -651,8 +708,9 @@
 
     @media (max-width: 768px) {
       .nav { padding: 0 16px; }
-      .nav-side { gap: 16px; }
-      .nav-link { font-size: 11px; letter-spacing: 0.02em; }
+      .nav-side { display: none; }
+      .nav-hamburger { display: flex; }
+      .nav-mobile-menu { display: block; }
 
       .trad-banner { padding: 10px 20px; flex-wrap: wrap; gap: 6px 14px; }
       .trad-banner-dot { display: none; }
@@ -726,7 +784,16 @@
     <a href="index.html#location" class="nav-link">地點 · Location</a>
     <a href="tel:+12063897099" class="nav-link">(206) 389-7099</a>
   </div>
+  <button class="nav-hamburger" aria-label="Toggle menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+<div class="nav-mobile-menu" aria-hidden="true">
+  <a href="about.html" class="nav-mobile-link">關於我們 · About</a>
+  <a href="menu.html" class="nav-mobile-link active">菜單 · Menu</a>
+  <a href="index.html#location" class="nav-mobile-link">地點 · Location</a>
+  <a href="tel:+12063897099" class="nav-mobile-link">(206) 389-7099</a>
+</div>
 
 <!-- ── MENU HERO ── -->
 <div class="menu-hero">
@@ -1105,6 +1172,25 @@ document.querySelectorAll('.nav-link').forEach(link => {
     animate(link, { y: 0 }, { easing: spring({ stiffness: 400, damping: 22 }) })
   );
 });
+
+const hamburger = document.querySelector('.nav-hamburger');
+const mobileMenu = document.querySelector('.nav-mobile-menu');
+if (hamburger && mobileMenu) {
+  hamburger.addEventListener('click', () => {
+    const isOpen = hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+    hamburger.setAttribute('aria-expanded', isOpen);
+    mobileMenu.setAttribute('aria-hidden', !isOpen);
+  });
+  mobileMenu.querySelectorAll('.nav-mobile-link').forEach(link => {
+    link.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      mobileMenu.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+      mobileMenu.setAttribute('aria-hidden', 'true');
+    });
+  });
+}
 </script>
 
 
