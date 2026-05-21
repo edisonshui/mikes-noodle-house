@@ -1523,6 +1523,54 @@
       background: rgba(247,235,200,0.4);
       border-radius: 50%;
     }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .nav { padding: 0 16px; }
+      .nav-side { gap: 16px; }
+      .nav-link { font-size: 11px; letter-spacing: 0.02em; }
+
+      .trad-banner { padding: 10px 20px; flex-wrap: wrap; gap: 6px 14px; }
+      .trad-banner-dot { display: none; }
+
+      .hero-content { grid-template-columns: 1fr; padding: 40px 24px 72px; gap: 28px; }
+      .hero-cn-panel { display: none; }
+      .hero-eng-title { font-size: clamp(30px, 9vw, 48px); }
+      .hero-tagline { font-size: 14px; }
+
+      .pillars-section { padding: 48px 24px; }
+      .pillars-inner { flex-direction: column; }
+      .pillar { padding: 28px 0; border-bottom: 1px solid rgba(180,130,40,0.15); }
+      .pillar-sep { display: none; }
+      .pillar-num { right: 0; }
+      .pillars-cta { margin-top: 40px; padding-top: 32px; }
+      .menu-cta-btn { padding: 14px 24px; gap: 10px; }
+      .menu-cta-divider { display: none; }
+
+      .gallery-header { padding: 0 24px; }
+
+      .story-section { grid-template-columns: 1fr; padding: 56px 24px; gap: 48px; }
+      .story-visual { align-items: center; }
+      .story-frame { width: 100%; max-width: 280px; height: 340px; }
+      .story-seal { right: -14px; }
+
+      .reviews-section { padding: 48px 24px; }
+      .reviews-header { flex-direction: column; align-items: flex-start; gap: 6px; }
+      .reviews-scores-row { flex-direction: column; gap: 10px; }
+      .score-sep { display: none; }
+      .reviews-score-chip { width: 100%; }
+      .reviews-grid { grid-template-columns: 1fr; }
+
+      .map-section { padding: 48px 24px; }
+      .map-layout { grid-template-columns: 1fr; gap: 24px; }
+      .map-frame { height: 260px; }
+      .exterior-photo { height: 180px; }
+
+      .footer { padding: 48px 24px 28px; }
+      .footer-top { grid-template-columns: 1fr; gap: 36px; }
+      .footer-nav-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; gap: 16px; padding-top: 24px; }
+    }
   </style>
 </head>
 <body>
@@ -2062,6 +2110,7 @@ document.querySelectorAll('.nav-link').forEach(link => {
   );
 });
 </script>
+
 
 </body>
 </html>

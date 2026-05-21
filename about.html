@@ -872,6 +872,48 @@
 
     .social-btn:hover { border-color: var(--red); color: var(--red); }
     .social-btn:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
+
+    @media (max-width: 768px) {
+      .nav { padding: 0 16px; }
+      .nav-side { gap: 16px; }
+      .nav-link { font-size: 11px; letter-spacing: 0.02em; }
+
+      .trad-banner { padding: 10px 20px; flex-wrap: wrap; gap: 6px 14px; }
+      .trad-banner-dot { display: none; }
+
+      .page-hero { grid-template-columns: 1fr; }
+      .page-hero-left { padding: 72px 24px 48px; min-height: 260px; }
+      .page-hero-right { height: 220px; }
+      .page-hero-frame { display: none; }
+      .hero-corner { display: none; }
+      .page-hero-title-cn { writing-mode: horizontal-tb; text-orientation: mixed; font-size: clamp(48px, 13vw, 72px); }
+
+      .founder-section { grid-template-columns: 1fr; padding: 56px 24px; gap: 48px; }
+      .founder-visual { align-items: center; }
+      .founder-frame { width: 100%; max-width: 280px; height: 360px; }
+      .founder-seal { right: -14px; }
+
+      .craft-section { padding: 48px 24px; }
+      .craft-grid { grid-template-columns: 1fr; }
+
+      .philosophy-section { padding: 64px 24px; }
+
+      .timeline-section { padding: 56px 24px; }
+      .timeline::before { left: 26px; transform: none; }
+      .timeline-item { display: block; position: relative; padding-left: 70px; margin-bottom: 44px; }
+      .timeline-year { position: absolute; left: 0; top: 0; }
+      .timeline-left, .timeline-right { text-align: left; padding: 0; }
+      .timeline-item:nth-child(even) .timeline-left { text-align: left; padding: 0; }
+
+      .values-section { padding: 48px 24px; }
+      .values-row { grid-template-columns: repeat(2, 1fr); }
+      .value-item { padding: 32px 20px; }
+
+      .footer { padding: 48px 24px 28px; }
+      .footer-top { grid-template-columns: 1fr; gap: 36px; }
+      .footer-nav-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; gap: 16px; padding-top: 24px; }
+    }
   </style>
 </head>
 <body>
@@ -1332,6 +1374,7 @@ document.querySelectorAll('.value-item').forEach(item => {
   );
 });
 </script>
+
 
 </body>
 </html>

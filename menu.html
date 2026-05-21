@@ -649,6 +649,41 @@
     .social-btn:hover { border-color: var(--red); color: var(--red); }
     .social-btn:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
 
+    @media (max-width: 768px) {
+      .nav { padding: 0 16px; }
+      .nav-side { gap: 16px; }
+      .nav-link { font-size: 11px; letter-spacing: 0.02em; }
+
+      .trad-banner { padding: 10px 20px; flex-wrap: wrap; gap: 6px 14px; }
+      .trad-banner-dot { display: none; }
+
+      .cat-nav { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+      .cat-nav::-webkit-scrollbar { display: none; }
+      .cat-nav-inner { justify-content: flex-start; max-width: none; margin: 0; padding: 0 4px; }
+      .cat-nav-link { padding: 12px 20px; white-space: nowrap; }
+      .cat-nav-sep { display: none; }
+      .cat-nav-en { display: none; }
+      .cat-nav-zh { font-size: 18px; }
+
+      .cat-section { padding: 48px 24px 52px; }
+      .cat-title-block { flex-direction: column; gap: 4px; }
+
+      .highlights-layout.left-heavy,
+      .highlights-layout.right-heavy,
+      .highlights-layout.three-equal,
+      .highlights-layout.two-equal { display: flex; flex-direction: column; height: auto; gap: 8px; }
+      .highlight-card { height: 240px; }
+      .highlight-card.span-rows { height: 300px; }
+
+      .ref-section { padding: 48px 24px 52px; }
+      .ref-grid { grid-template-columns: 1fr; gap: 24px; }
+
+      .footer { padding: 48px 24px 28px; }
+      .footer-top { grid-template-columns: 1fr; gap: 36px; }
+      .footer-nav-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; gap: 16px; padding-top: 24px; }
+    }
+
     /* ── TRAD BANNER ── */
     .trad-banner {
       background: var(--red);
@@ -1071,6 +1106,7 @@ document.querySelectorAll('.nav-link').forEach(link => {
   );
 });
 </script>
+
 
 </body>
 </html>
