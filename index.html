@@ -99,8 +99,10 @@
       background: none;
       border: none;
       cursor: pointer;
-      padding: 8px 4px;
+      padding: 12px 10px;
       z-index: 10;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
     }
     .nav-hamburger span {
       display: block;
@@ -253,7 +255,6 @@
       text-transform: uppercase;
       margin-bottom: 20px;
       font-weight: 400;
-      white-space: nowrap;
     }
 
     .hero-eng-title {
@@ -478,12 +479,12 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      filter: sepia(6%) contrast(1.05) brightness(0.93);
+      filter: sepia(6%) contrast(1.05) brightness(1.05);
       transition: filter 0.3s ease;
     }
 
     .menu-ring:hover .menu-ring-inner img {
-      filter: sepia(0%) contrast(1.08) brightness(0.98);
+      filter: sepia(0%) contrast(1.08) brightness(1.1);
     }
 
     /* ── PILLARS SECTION ── */
@@ -852,7 +853,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      filter: sepia(22%) contrast(1.06) brightness(0.87);
+      filter: sepia(22%) contrast(1.06) brightness(0.97);
     }
 
     .story-photo::after {
@@ -1191,7 +1192,7 @@
       height: 100%;
       object-fit: cover;
       object-position: center 30%;
-      filter: sepia(18%) contrast(1.04) brightness(0.9);
+      filter: sepia(18%) contrast(1.04) brightness(1.0);
     }
 
     .map-frame {
@@ -1434,7 +1435,7 @@
       height: 100%;
       object-fit: cover;
       object-position: center;
-      filter: sepia(14%) contrast(1.04) brightness(0.86) saturate(0.82);
+      filter: sepia(14%) contrast(1.04) brightness(0.97) saturate(0.88);
       transform: scale(1.05);
       transition: transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94), filter 0.5s ease;
       will-change: transform;
@@ -1442,7 +1443,7 @@
 
     .gallery-item:hover img {
       transform: scale(1);
-      filter: sepia(3%) contrast(1.07) brightness(0.95) saturate(0.98);
+      filter: sepia(3%) contrast(1.07) brightness(1.06) saturate(1.0);
     }
 
     .gallery-item-overlay {
@@ -1594,6 +1595,7 @@
       .hero-content { grid-template-columns: 1fr; padding: 40px 24px 72px; gap: 28px; }
       .hero-cn-panel { display: none; }
       .hero-eng-title { font-size: clamp(30px, 9vw, 48px); }
+      .hero-pretitle { letter-spacing: 0.28em; }
       .hero-tagline { font-size: 14px; }
 
       .pillars-section { padding: 48px 24px; }
