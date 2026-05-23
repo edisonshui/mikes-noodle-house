@@ -41,7 +41,7 @@
       background-size: 200px 200px;
       opacity: 0.045;
       pointer-events: none;
-      z-index: 9999;
+      z-index: 100;
     }
 
     section, nav, footer, .above { position: relative; z-index: 1; }
@@ -2183,14 +2183,13 @@ const hamburger = document.querySelector('.nav-hamburger');
 const mobileMenu = document.querySelector('.nav-mobile-menu');
 if (hamburger && mobileMenu) {
   function toggleNav(e) {
-    if (e.type === 'touchend') e.preventDefault();
+    e.preventDefault();
     const isOpen = hamburger.classList.toggle('open');
     mobileMenu.classList.toggle('open');
     hamburger.setAttribute('aria-expanded', isOpen);
     mobileMenu.setAttribute('aria-hidden', !isOpen);
   }
-  hamburger.addEventListener('click', toggleNav);
-  hamburger.addEventListener('touchend', toggleNav, { passive: false });
+  hamburger.addEventListener('pointerdown', toggleNav);
   mobileMenu.querySelectorAll('.nav-mobile-link').forEach(link => {
     link.addEventListener('click', () => {
       hamburger.classList.remove('open');
