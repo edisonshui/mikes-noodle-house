@@ -23,13 +23,12 @@
     }
 
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; overflow-x: hidden; }
 
     body {
       font-family: 'Noto Sans SC', 'PingFang HK', system-ui, sans-serif;
       background-color: var(--paper);
       color: var(--ink);
-      overflow-x: hidden;
       line-height: 1.7;
     }
 
@@ -1178,12 +1177,15 @@ document.querySelectorAll('.nav-link').forEach(link => {
 const hamburger = document.querySelector('.nav-hamburger');
 const mobileMenu = document.querySelector('.nav-mobile-menu');
 if (hamburger && mobileMenu) {
-  hamburger.addEventListener('click', () => {
+  function toggleNav(e) {
+    if (e.type === 'touchend') e.preventDefault();
     const isOpen = hamburger.classList.toggle('open');
     mobileMenu.classList.toggle('open');
     hamburger.setAttribute('aria-expanded', isOpen);
     mobileMenu.setAttribute('aria-hidden', !isOpen);
-  });
+  }
+  hamburger.addEventListener('click', toggleNav);
+  hamburger.addEventListener('touchend', toggleNav, { passive: false });
   mobileMenu.querySelectorAll('.nav-mobile-link').forEach(link => {
     link.addEventListener('click', () => {
       hamburger.classList.remove('open');
