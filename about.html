@@ -52,8 +52,10 @@
       position: fixed;
       top: 0; left: 0; right: 0;
       z-index: 1000;
-      background: var(--paper);
-      border-bottom: 1px solid var(--ink-lt);
+      background: rgba(245, 234, 204, 0.82);
+      -webkit-backdrop-filter: blur(14px);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(122, 80, 48, 0.25);
       height: 52px;
       display: flex;
       align-items: center;
@@ -185,11 +187,11 @@
       transition: color 0.18s ease;
     }
     .nav-ml-en {
-      font-size: 10px;
-      letter-spacing: 0.4em;
-      text-transform: uppercase;
-      color: var(--ink-lt);
+      font-size: 14px;
+      letter-spacing: 0.06em;
+      color: var(--ink-mid);
       font-family: 'Cormorant Garamond', serif;
+      font-weight: 600;
       transition: color 0.18s ease;
     }
     .nav-mobile-link:hover .nav-ml-cn { color: var(--red); }
@@ -1045,11 +1047,9 @@
 </nav>
 <div class="nav-mobile-menu" id="nav-mobile-menu" aria-hidden="true">
   <a href="about.html" class="nav-mobile-link">
-    <span class="nav-ml-cn">關於我們</span>
     <span class="nav-ml-en">About</span>
   </a>
   <a href="menu.html" class="nav-mobile-link">
-    <span class="nav-ml-cn">菜單</span>
     <span class="nav-ml-en">Menu</span>
   </a>
 </div>
