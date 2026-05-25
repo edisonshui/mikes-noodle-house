@@ -52,10 +52,8 @@
       position: fixed;
       top: 0; left: 0; right: 0;
       z-index: 1000;
-      background: rgba(245, 234, 204, 0.82);
-      -webkit-backdrop-filter: blur(14px);
-      backdrop-filter: blur(14px);
-      border-bottom: 1px solid rgba(122, 80, 48, 0.25);
+      background: var(--paper);
+      border-bottom: 1px solid var(--ink-lt);
       height: 52px;
       display: flex;
       align-items: center;
@@ -119,7 +117,9 @@
       display: none;
       position: fixed;
       top: 52px; left: 0; right: 0;
-      background: var(--paper);
+      background: rgba(245, 234, 204, 0.82);
+      -webkit-backdrop-filter: blur(16px);
+      backdrop-filter: blur(16px);
       z-index: 998;
       flex-direction: column;
       overflow: hidden;
