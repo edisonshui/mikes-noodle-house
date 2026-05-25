@@ -92,55 +92,106 @@
       background: none;
       border: none;
       cursor: pointer;
-      padding: 12px 10px;
+      padding: 10px 8px;
       touch-action: manipulation;
       -webkit-tap-highlight-color: transparent;
     }
     .nav-hamburger span {
       display: block;
-      width: 22px;
-      height: 2px;
+      height: 1.5px;
       background: var(--ink-mid);
       transform-origin: center;
-      transition: transform 0.25s ease, opacity 0.25s ease;
-      margin-bottom: 5px;
+      transition: transform 0.32s cubic-bezier(0.4,0,0.2,1), opacity 0.32s cubic-bezier(0.4,0,0.2,1), width 0.32s cubic-bezier(0.4,0,0.2,1), background 0.2s ease;
     }
-    .nav-hamburger span:last-child { margin-bottom: 0; }
-    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger span:nth-child(1) { width: 22px; margin-bottom: 6px; }
+    .nav-hamburger span:nth-child(2) { width: 14px; margin-bottom: 6px; }
+    .nav-hamburger span:nth-child(3) { width: 22px; }
+    .nav-hamburger:hover span { background: var(--red); }
+    .nav-hamburger.open span:nth-child(1) { width: 22px; transform: translateY(7.5px) rotate(45deg); background: var(--red); }
     .nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
-    .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .nav-hamburger.open span:nth-child(3) { width: 22px; transform: translateY(-7.5px) rotate(-45deg); background: var(--red); }
 
     .nav-mobile-menu {
       display: none;
       position: fixed;
       top: 52px; left: 0; right: 0;
       background: var(--paper);
-      border-bottom: 2px solid var(--red);
       z-index: 998;
-      transform: translateY(-6px);
+      flex-direction: column;
+      overflow: hidden;
+      visibility: hidden;
       opacity: 0;
-      pointer-events: none;
-      transition: transform 0.22s ease, opacity 0.22s ease;
+      transform: translateY(-8px);
+      transition:
+        opacity 0.28s cubic-bezier(0.4,0,0.2,1),
+        transform 0.28s cubic-bezier(0.4,0,0.2,1),
+        visibility 0s linear 0.28s;
+    }
+    .nav-mobile-menu::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(to right, var(--red), var(--red-dk));
     }
     .nav-mobile-menu.open {
-      display: block;
-      transform: translateY(0);
+      visibility: visible;
       opacity: 1;
-      pointer-events: auto;
+      transform: translateY(0);
+      transition:
+        opacity 0.28s cubic-bezier(0.4,0,0.2,1),
+        transform 0.28s cubic-bezier(0.4,0,0.2,1),
+        visibility 0s linear 0s;
     }
     .nav-mobile-link {
-      display: block;
-      padding: 16px 24px;
-      font-size: 14px;
-      color: var(--ink-mid);
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      padding: 28px 32px;
       text-decoration: none;
-      letter-spacing: 0.05em;
-      border-bottom: 1px solid rgba(0,0,0,0.06);
-      transition: color 0.2s ease, background 0.2s ease;
+      border-bottom: 1px solid rgba(78,46,24,0.1);
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(10px);
+      transition:
+        opacity 0.35s ease,
+        transform 0.35s cubic-bezier(0.25,0.46,0.45,0.94),
+        background 0.18s ease;
     }
+    .nav-mobile-menu.open .nav-mobile-link:nth-child(1) { opacity: 1; transform: none; transition-delay: 0.08s; }
+    .nav-mobile-menu.open .nav-mobile-link:nth-child(2) { opacity: 1; transform: none; transition-delay: 0.15s; }
     .nav-mobile-link:last-child { border-bottom: none; }
-    .nav-mobile-link:hover { color: var(--red); background: rgba(0,0,0,0.02); }
-    .nav-mobile-link.active { color: var(--red); }
+    .nav-mobile-link:active { background: rgba(193,37,24,0.04); }
+    .nav-mobile-link::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 20px; bottom: 20px;
+      width: 2px;
+      background: var(--red);
+      transform: scaleY(0);
+      transform-origin: bottom;
+      transition: transform 0.22s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+    .nav-mobile-link:hover::before { transform: scaleY(1); }
+    .nav-ml-cn {
+      font-family: 'Noto Serif SC', serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--ink);
+      letter-spacing: 0.1em;
+      transition: color 0.18s ease;
+    }
+    .nav-ml-en {
+      font-size: 10px;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--ink-lt);
+      font-family: 'Cormorant Garamond', serif;
+      transition: color 0.18s ease;
+    }
+    .nav-mobile-link:hover .nav-ml-cn { color: var(--red); }
+    .nav-mobile-link:hover .nav-ml-en { color: var(--red-mid); }
 
     /* ── MENU HERO ── */
     .menu-hero {
@@ -707,7 +758,7 @@
       .nav { padding: 0 16px; }
       .nav-side { display: none; }
       .nav-hamburger { display: block; }
-      .nav-mobile-menu { display: block; }
+      .nav-mobile-menu { display: flex; }
 
       .trad-banner { padding: 10px 20px; flex-wrap: wrap; gap: 6px 14px; }
       .trad-banner-dot { display: none; }
@@ -786,8 +837,14 @@
   </button>
 </nav>
 <div class="nav-mobile-menu" id="nav-mobile-menu" aria-hidden="true">
-  <a href="about.html" class="nav-mobile-link">關於我們 · About</a>
-  <a href="menu.html" class="nav-mobile-link active">菜單 · Menu</a>
+  <a href="about.html" class="nav-mobile-link">
+    <span class="nav-ml-cn">關於我們</span>
+    <span class="nav-ml-en">About</span>
+  </a>
+  <a href="menu.html" class="nav-mobile-link">
+    <span class="nav-ml-cn">菜單</span>
+    <span class="nav-ml-en">Menu</span>
+  </a>
 </div>
 <script>
 (function() {
@@ -795,19 +852,16 @@
   var menu = document.getElementById('nav-mobile-menu');
   if (!btn || !menu) return;
   var open = false;
-  btn.onclick = function() {
+  function toggle() {
     open = !open;
     btn.classList.toggle('open', open);
-    menu.style.display = open ? 'block' : 'none';
-    menu.style.opacity = open ? '1' : '0';
-    menu.style.pointerEvents = open ? 'auto' : 'none';
-  };
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    menu.classList.toggle('open', open);
+    menu.setAttribute('aria-hidden', open ? 'false' : 'true');
+  }
+  btn.addEventListener('pointerdown', function(e) { e.preventDefault(); toggle(); });
   menu.querySelectorAll('a').forEach(function(a) {
-    a.onclick = function() {
-      open = false;
-      btn.classList.remove('open');
-      menu.style.display = 'none';
-    };
+    a.addEventListener('click', function() { if (open) toggle(); });
   });
 })();
 </script>
