@@ -1753,6 +1753,164 @@
       .footer-nav-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
       .footer-bottom { flex-direction: column; align-items: flex-start; gap: 16px; padding-top: 24px; }
     }
+
+    /* ── HERO CTA ROW ── */
+    .hero-cta-row {
+      display: flex;
+      gap: 14px;
+      margin-top: 28px;
+      margin-bottom: 28px;
+      flex-wrap: wrap;
+    }
+
+    .hero-cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 32px;
+      font-size: 10.5px;
+      letter-spacing: 0.38em;
+      text-transform: uppercase;
+      text-decoration: none;
+      font-family: 'Noto Sans SC', sans-serif;
+      font-weight: 400;
+      position: relative;
+      transition: background 0.22s ease, border-color 0.22s ease;
+    }
+
+    .hero-cta-btn--primary {
+      background: var(--red);
+      color: #F7EBC8;
+      border: 1px solid var(--red);
+    }
+
+    .hero-cta-btn--primary:hover { background: var(--red-dk); border-color: var(--red-dk); }
+
+    .hero-cta-btn--secondary {
+      background: transparent;
+      color: #F7EBC8;
+      border: 1px solid rgba(247,235,200,0.42);
+    }
+
+    .hero-cta-btn--secondary:hover {
+      background: rgba(247,235,200,0.08);
+      border-color: rgba(247,235,200,0.65);
+    }
+
+    .hero-cta-btn:focus-visible { outline: 2px solid var(--gold-lt); outline-offset: 3px; }
+    .hero-cta-btn:active { transform: scale(0.98); }
+    .hero-cta-arrow { opacity: 0.75; }
+
+    /* ── TRUST STRIP ── */
+    .trust-strip {
+      background: var(--paper-warm);
+      border-bottom: 1px solid rgba(180,130,40,0.22);
+      padding: 11px 48px;
+    }
+
+    .trust-strip-inner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .trust-item {
+      font-size: 11.5px;
+      color: var(--ink-mid);
+      letter-spacing: 0.06em;
+    }
+
+    .trust-dot {
+      width: 3px;
+      height: 3px;
+      background: var(--gold);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* ── SIGNATURE BOWLS ── */
+    .bowls-section {
+      padding: 80px 80px 64px;
+      background: var(--paper);
+    }
+
+    .bowls-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 28px 12px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .bowl-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .bowl-desc {
+      font-size: 12px;
+      color: var(--ink-mid);
+      text-align: center;
+      line-height: 1.65;
+      letter-spacing: 0.015em;
+    }
+
+    /* ── LOCATION CTA BUTTONS ── */
+    .location-ctas {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    .location-cta-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 13px 20px;
+      text-decoration: none;
+      font-size: 10.5px;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      font-weight: 400;
+      transition: background 0.22s ease, border-color 0.22s ease;
+    }
+
+    .location-cta-btn--primary {
+      background: var(--red);
+      color: var(--cream);
+      border: 1px solid var(--red);
+    }
+
+    .location-cta-btn--primary:hover { background: var(--red-dk); border-color: var(--red-dk); }
+
+    .location-cta-btn--secondary {
+      background: transparent;
+      color: var(--red);
+      border: 1px solid rgba(193,37,24,0.4);
+    }
+
+    .location-cta-btn--secondary:hover {
+      background: rgba(193,37,24,0.06);
+      border-color: var(--red);
+    }
+
+    .location-cta-btn:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
+    .location-cta-btn:active { transform: scale(0.98); }
+
+    @media (max-width: 768px) {
+      .trust-strip { padding: 10px 20px; }
+      .trust-dot { display: none; }
+      .trust-item { font-size: 11px; }
+      .hero-cta-row { gap: 10px; }
+      .hero-cta-btn { padding: 12px 22px; font-size: 10px; }
+      .bowls-section { padding: 48px 24px 40px; }
+      .bowls-grid { grid-template-columns: repeat(2, 1fr); gap: 28px 16px; }
+    }
   </style>
 </head>
 <body>
@@ -1826,9 +1984,8 @@
     <div class="hero-text-block">
       <p class="hero-pretitle">Seattle Chinatown · International District</p>
       <h1 class="hero-eng-title">
-        Where Hong Kong<br>
-        <em>comes home</em><br>
-        in Seattle
+        Hong Kong wonton noodles<br>
+        in <em>Seattle's Chinatown-ID</em>
       </h1>
       <div class="hero-divider">
         <div class="hero-divider-line"></div>
@@ -1836,10 +1993,17 @@
         <div class="hero-divider-line"></div>
       </div>
       <p class="hero-tagline">
-        Hand-folded wontons. Slow-simmered bone broth.<br>
-        Forty years of the same honest bowl.<br>
-        全記麵家 — 粥麵專家
+        Hand-folded wontons, fresh egg noodles, and slow-simmered broth since 1986.
       </p>
+      <div class="hero-cta-row">
+        <a href="menu.html" class="hero-cta-btn hero-cta-btn--primary">
+          <span>View Menu</span>
+          <span class="hero-cta-arrow">→</span>
+        </a>
+        <a href="https://maps.google.com/maps?q=418+Maynard+Ave+S,+Seattle,+WA+98104" target="_blank" rel="noopener" class="hero-cta-btn hero-cta-btn--secondary">
+          <span>Get Directions</span>
+        </a>
+      </div>
       <div class="hero-stamp">
         <span class="hero-stamp-year">1986</span>
         <span class="hero-stamp-label">Established · 西雅圖</span>
@@ -1862,6 +2026,17 @@
   <span class="trad-banner-text">418 Maynard Ave S, Seattle WA</span>
   <div class="trad-banner-dot"></div>
   <span class="trad-banner-text">每日供應 · Open Daily</span>
+</div>
+
+<!-- ── TRUST STRIP ── -->
+<div class="trust-strip">
+  <div class="trust-strip-inner">
+    <span class="trust-item">4.2★ Google · 1,400+ reviews</span>
+    <div class="trust-dot"></div>
+    <span class="trust-item">4.0★ Yelp · 1,552 reviews</span>
+    <div class="trust-dot"></div>
+    <span class="trust-item">Featured in Seattle Times · Eater Seattle · The Infatuation</span>
+  </div>
 </div>
 
 <!-- ── WHY MIKE'S PILLARS ── -->
@@ -1898,12 +2073,72 @@
 
   </div>
 
-  <div class="pillars-cta">
-    <span class="menu-cta-eyebrow">不知道點什麼？· Not sure what to order?</span>
+</section>
+
+<!-- ── SIGNATURE BOWLS ── -->
+<section class="bowls-section" id="dishes">
+  <div class="menu-header">
+    <span class="menu-eyebrow">不知道點什麼？· Customer Favorites</span>
+    <h2 class="menu-title-zh">招牌碗麵</h2>
+    <p class="menu-title-en">Signature Bowls</p>
+  </div>
+  <div class="bowls-grid">
+    <div class="bowl-card">
+      <div class="menu-ring" tabindex="0" role="img" aria-label="雲吞麵">
+        <div class="menu-ring-inner">
+          <img src="brand_assets/Mike%27s%20Noodle%20House%20Pictures/IMG_3538.jpg" alt="雲吞麵 Wonton Noodle Soup" loading="lazy">
+        </div>
+      </div>
+      <span class="menu-label-zh">雲吞麵</span>
+      <span class="menu-label-en">Wonton Noodle Soup</span>
+      <p class="bowl-desc">Hand-folded wontons in clear pork bone broth with springy egg noodles.</p>
+    </div>
+    <div class="bowl-card">
+      <div class="menu-ring" tabindex="0" role="img" aria-label="牛腩麵">
+        <div class="menu-ring-inner">
+          <img src="brand_assets/IMG_4931.jpg" alt="牛腩麵 Beef Brisket Noodle" loading="lazy">
+        </div>
+      </div>
+      <span class="menu-label-zh">牛腩麵</span>
+      <span class="menu-label-en">Beef Brisket Noodle</span>
+      <p class="bowl-desc">Slow-braised brisket over springy egg noodles in rich dark broth.</p>
+    </div>
+    <div class="bowl-card">
+      <div class="menu-ring" tabindex="0" role="img" aria-label="雲吞牛腩麵">
+        <div class="menu-ring-inner">
+          <img src="brand_assets/Mike%27s%20Noodle%20House%20Pictures/IMG_3560.jpg" alt="雲吞牛腩麵 Wonton Brisket Noodle" loading="lazy">
+        </div>
+      </div>
+      <span class="menu-label-zh">雲吞牛腩麵</span>
+      <span class="menu-label-en">Wonton &amp; Brisket</span>
+      <p class="bowl-desc">The best of both worlds — wontons and braised brisket in one bowl.</p>
+    </div>
+    <div class="bowl-card">
+      <div class="menu-ring" tabindex="0" role="img" aria-label="艇仔粥">
+        <div class="menu-ring-inner">
+          <img src="brand_assets/Mike%27s%20Noodle%20House%20Pictures/IMG_3535.jpg" alt="艇仔粥 Sam-pan Congee" loading="lazy">
+        </div>
+      </div>
+      <span class="menu-label-zh">艇仔粥</span>
+      <span class="menu-label-en">Sam-pan Congee</span>
+      <p class="bowl-desc">Silky congee with mixed toppings — a classic Hong Kong breakfast staple.</p>
+    </div>
+    <div class="bowl-card">
+      <div class="menu-ring" tabindex="0" role="img" aria-label="油條">
+        <div class="menu-ring-inner">
+          <img src="brand_assets/youtiao.jpg" alt="油條 Crispy Fried Dough" loading="lazy">
+        </div>
+      </div>
+      <span class="menu-label-zh">油條</span>
+      <span class="menu-label-en">Crispy Fried Dough</span>
+      <p class="bowl-desc">Crispy golden dough sticks, perfect alongside congee or noodle soup.</p>
+    </div>
+  </div>
+  <div class="menu-cta">
     <a href="menu.html" class="menu-cta-btn">
-      <span class="menu-cta-zh">菜單照片</span>
+      <span class="menu-cta-zh">全部菜單</span>
       <span class="menu-cta-divider"></span>
-      <span class="menu-cta-en">View Full Menu with Photos</span>
+      <span class="menu-cta-en">See Full Menu</span>
       <span class="menu-cta-arrow">→</span>
     </a>
   </div>
@@ -2115,6 +2350,15 @@
         </p>
       </div>
 
+      <div class="location-ctas">
+        <a href="https://maps.google.com/maps?q=418+Maynard+Ave+S,+Seattle,+WA+98104" target="_blank" rel="noopener" class="location-cta-btn location-cta-btn--primary">
+          Get Directions →
+        </a>
+        <a href="tel:+12063897099" class="location-cta-btn location-cta-btn--secondary">
+          Call Now · (206) 389-7099
+        </a>
+      </div>
+
       <div class="exterior-photo">
         <img src="brand_assets/web_DSCF0052.jpg" alt="Mike's Noodle House exterior — 418 Maynard Ave S" loading="lazy">
       </div>
@@ -2205,6 +2449,7 @@
     .from('.hero-eng-title',   { opacity: 0, y: 32, duration: 0.9,  ease: 'power3.out' }, '-=0.45')
     .from('.hero-divider',     { scaleX: 0, transformOrigin: 'center', duration: 0.55, ease: 'power2.inOut' }, '-=0.3')
     .from('.hero-tagline',     { opacity: 0, y: 14, duration: 0.65, ease: 'power2.out' }, '-=0.2')
+    .from('.hero-cta-row',     { opacity: 0, y: 18, duration: 0.65, ease: 'power2.out' }, '-=0.2')
     .from('.hero-stamp',       { opacity: 0, y: 12, duration: 0.6, ease: 'power2.out' }, '-=0.2')
     .from('.hero-scroll',      { opacity: 0, duration: 0.6, ease: 'power2.out' }, '-=0.1');
 
@@ -2223,9 +2468,14 @@
     scrollTrigger: st('.pillars-section', 'top 80%'),
     opacity: 0, scaleY: 0, transformOrigin: 'top center', stagger: 0.14, duration: 0.7, ease: 'power2.inOut'
   });
-  gsap.from('.pillars-cta', {
-    scrollTrigger: st('.pillars-cta', 'top 88%'),
-    opacity: 0, y: 24, duration: 0.8, ease: 'power3.out'
+  /* ── SIGNATURE BOWLS ── */
+  gsap.from('.bowl-card', {
+    scrollTrigger: st('.bowls-section', 'top 82%'),
+    opacity: 0, y: 32, stagger: 0.1, duration: 0.85, ease: 'power3.out'
+  });
+  gsap.from('.bowls-section .menu-cta', {
+    scrollTrigger: st('.bowls-section .menu-cta', 'top 90%'),
+    opacity: 0, y: 20, duration: 0.75, ease: 'power3.out'
   });
 
   /* ── GALLERY ── */
@@ -2281,6 +2531,26 @@
 <!-- Motion micro-interactions -->
 <script type="module">
 import { animate, spring } from 'https://cdn.jsdelivr.net/npm/motion@10.18.2/+esm';
+
+/* Hero CTA buttons */
+document.querySelectorAll('.hero-cta-btn').forEach(btn => {
+  btn.addEventListener('mouseenter', () =>
+    animate(btn, { scale: 1.04 }, { easing: spring({ stiffness: 420, damping: 18 }) })
+  );
+  btn.addEventListener('mouseleave', () =>
+    animate(btn, { scale: 1 }, { easing: spring({ stiffness: 300, damping: 24 }) })
+  );
+});
+
+/* Location CTA buttons */
+document.querySelectorAll('.location-cta-btn').forEach(btn => {
+  btn.addEventListener('mouseenter', () =>
+    animate(btn, { scale: 1.03 }, { easing: spring({ stiffness: 420, damping: 18 }) })
+  );
+  btn.addEventListener('mouseleave', () =>
+    animate(btn, { scale: 1 }, { easing: spring({ stiffness: 300, damping: 24 }) })
+  );
+});
 
 /* Red buttons */
 document.querySelectorAll('.red-btn').forEach(btn => {
