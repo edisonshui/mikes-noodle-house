@@ -869,6 +869,15 @@
       .highlight-card { height: 240px; }
       .highlight-card.span-rows { height: 300px; }
 
+      .firsttime-section { padding: 48px 24px 52px; }
+      .ft-grid { grid-template-columns: 1fr; gap: 10px; }
+      .ft-grid .ft-card:nth-child(5) { grid-column: auto; max-width: none; }
+
+      .visit-cta { padding: 40px 24px; }
+      .visit-cta-inner { flex-direction: column; align-items: flex-start; gap: 28px; }
+      .visit-cta-buttons { flex-direction: column; width: 100%; }
+      .btn-directions, .btn-call { width: 100%; justify-content: center; letter-spacing: 0.28em; }
+
       .ref-section { padding: 48px 24px 52px; }
       .ref-grid { grid-template-columns: 1fr; gap: 24px; }
 
@@ -877,6 +886,198 @@
       .footer-nav-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
       .footer-bottom { flex-direction: column; align-items: flex-start; gap: 16px; padding-top: 24px; }
     }
+
+    /* ── FIRST TIME HERE ── */
+    .firsttime-section {
+      padding: 72px 80px 80px;
+      background: var(--paper-alt);
+      border-top: 3px solid var(--red);
+      border-bottom: 3px solid var(--red);
+      position: relative;
+    }
+    .firsttime-section::after {
+      content: '';
+      position: absolute;
+      top: 10px; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold-lt), transparent);
+    }
+    .firsttime-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    .firsttime-sub {
+      font-size: 14px;
+      color: var(--ink-lt);
+      line-height: 1.85;
+      max-width: 480px;
+      margin: 10px auto 0;
+    }
+    .ft-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+    .ft-grid .ft-card:nth-child(5) {
+      grid-column: 1 / 3;
+      max-width: calc(50% - 7px);
+    }
+    .ft-card {
+      display: flex;
+      gap: 18px;
+      align-items: flex-start;
+      padding: 22px 26px;
+      background: var(--cream);
+      border: 1px solid rgba(180,130,40,0.18);
+      box-shadow: 0 2px 8px rgba(28,14,7,0.05), 0 6px 24px rgba(28,14,7,0.06);
+      transition: border-color 0.22s ease, box-shadow 0.22s ease, transform 0.28s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+    .ft-card:hover {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 1px rgba(193,37,24,0.08), 0 8px 32px rgba(28,14,7,0.12);
+      transform: translateY(-3px);
+    }
+    .ft-card:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
+    .ft-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 30px;
+      font-weight: 300;
+      color: var(--red);
+      line-height: 1;
+      min-width: 32px;
+      letter-spacing: -0.02em;
+      flex-shrink: 0;
+      margin-top: 3px;
+      opacity: 0.75;
+    }
+    .ft-body { flex: 1; }
+    .ft-names {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      margin-bottom: 6px;
+      flex-wrap: wrap;
+    }
+    .ft-cn {
+      font-family: 'Noto Serif SC', serif;
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--ink);
+      letter-spacing: 0.04em;
+    }
+    .ft-en {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 14.5px;
+      font-style: italic;
+      color: var(--ink-mid);
+    }
+    .ft-desc {
+      font-size: 13px;
+      color: var(--ink-lt);
+      line-height: 1.78;
+      margin-bottom: 8px;
+    }
+    .ft-tip {
+      display: inline-block;
+      font-size: 9.5px;
+      letter-spacing: 0.40em;
+      color: var(--red);
+      text-transform: uppercase;
+      opacity: 0.68;
+    }
+
+    /* ── HIGHLIGHT CARD ONE-LINER ── */
+    .highlight-desc {
+      display: block;
+      font-size: 11.5px;
+      color: rgba(247,235,200,0.45);
+      line-height: 1.6;
+      margin-top: 4px;
+      letter-spacing: 0.02em;
+    }
+
+    /* ── VISIT CTA ── */
+    .visit-cta {
+      padding: 52px 80px;
+      background: var(--paper-warm);
+      border-top: 3px solid var(--red);
+      border-bottom: 3px solid var(--red);
+      position: relative;
+    }
+    .visit-cta::after {
+      content: '';
+      position: absolute;
+      top: 10px; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold-lt), transparent);
+    }
+    .visit-cta-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+    }
+    .visit-cta-text h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(22px, 2.8vw, 34px);
+      font-weight: 600;
+      color: var(--ink);
+      line-height: 1.2;
+      margin-bottom: 8px;
+      letter-spacing: -0.01em;
+    }
+    .visit-cta-note {
+      font-size: 12.5px;
+      color: var(--ink-mid);
+      letter-spacing: 0.04em;
+      line-height: 1.9;
+    }
+    .visit-cta-note strong {
+      color: var(--ink);
+      font-weight: 500;
+    }
+    .visit-cta-buttons {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      flex-shrink: 0;
+    }
+    .btn-directions {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 13px 28px;
+      background: var(--red);
+      color: #F7EBC8;
+      text-decoration: none;
+      font-size: 10.5px;
+      letter-spacing: 0.40em;
+      text-transform: uppercase;
+      transition: background 0.22s ease, transform 0.22s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+    .btn-directions:hover { background: var(--red-dk); transform: translateY(-2px); }
+    .btn-directions:active { transform: scale(0.98); }
+    .btn-directions:focus-visible { outline: 2px solid var(--red); outline-offset: 3px; }
+    .btn-call {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 28px;
+      border: 1px solid rgba(193,37,24,0.5);
+      color: var(--red);
+      text-decoration: none;
+      font-size: 10.5px;
+      letter-spacing: 0.40em;
+      text-transform: uppercase;
+      transition: background 0.22s ease, border-color 0.22s ease, transform 0.22s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+    .btn-call:hover { background: rgba(193,37,24,0.06); border-color: var(--red-dk); transform: translateY(-2px); }
+    .btn-call:active { transform: scale(0.98); }
+    .btn-call:focus-visible { outline: 2px solid var(--red); outline-offset: 3px; }
 
     /* ── TRAD BANNER ── */
     .trad-banner {
@@ -970,6 +1171,11 @@
 <!-- ── CATEGORY NAVIGATION ── -->
 <nav class="cat-nav" id="cat-nav">
   <div class="cat-nav-inner">
+    <a href="#firsttime" class="cat-nav-link">
+      <span class="cat-nav-zh">新客</span>
+      <span class="cat-nav-en">New Here?</span>
+    </a>
+    <div class="cat-nav-sep"></div>
     <a href="#noodle" class="cat-nav-link active">
       <span class="cat-nav-zh">麵</span>
       <span class="cat-nav-en">Noodle</span>
@@ -1003,6 +1209,78 @@
   <span class="trad-banner-text">Prices subject to change</span>
 </div>
 
+<!-- ── FIRST TIME HERE ── -->
+<section id="firsttime" class="firsttime-section">
+  <div class="firsttime-header">
+    <span class="section-eyebrow">New Here? · 第一次來</span>
+    <h2 class="section-h2">Not sure what to order?</h2>
+    <p class="firsttime-sub">Five dishes that represent us well — a good starting point for your first visit.</p>
+  </div>
+  <div class="ft-grid">
+
+    <div class="ft-card">
+      <div class="ft-num">01</div>
+      <div class="ft-body">
+        <div class="ft-names">
+          <span class="ft-cn">雲吞麵</span>
+          <span class="ft-en">Wonton Noodle Soup</span>
+        </div>
+        <p class="ft-desc">Our signature. Handmade shrimp-pork wontons in a light, clear broth with springy egg noodles. The dish we're known for — clean, satisfying, and deeply Hong Kong.</p>
+        <span class="ft-tip">Signature bowl · Classic starting point</span>
+      </div>
+    </div>
+
+    <div class="ft-card">
+      <div class="ft-num">02</div>
+      <div class="ft-body">
+        <div class="ft-names">
+          <span class="ft-cn">雲吞牛腩麵</span>
+          <span class="ft-en">Wonton &amp; Beef Brisket Noodle</span>
+        </div>
+        <p class="ft-desc">Wontons paired with slow-braised beef brisket in a richer, deeper broth. All the flavour of the classic, with a heartier bite from the tender brisket.</p>
+        <span class="ft-tip">Hearty · House favourite</span>
+      </div>
+    </div>
+
+    <div class="ft-card">
+      <div class="ft-num">03</div>
+      <div class="ft-body">
+        <div class="ft-names">
+          <span class="ft-cn">牛腩撈麵</span>
+          <span class="ft-en">Beef Brisket Dry Noodle</span>
+        </div>
+        <p class="ft-desc">Tender braised beef brisket over noodles with a rich, savoury sauce — no broth. Comforting and full-flavoured, with every strand coated in the braising sauce.</p>
+        <span class="ft-tip">Rich &amp; saucy · No broth</span>
+      </div>
+    </div>
+
+    <div class="ft-card">
+      <div class="ft-num">04</div>
+      <div class="ft-body">
+        <div class="ft-names">
+          <span class="ft-cn">荔灣艇仔粥</span>
+          <span class="ft-en">Sam-pan Congee</span>
+        </div>
+        <p class="ft-desc">Silky smooth rice porridge (congee) slow-cooked until velvety, topped with seafood and garnishes. A Hong Kong breakfast staple — warm, gentle, and deeply comforting.</p>
+        <span class="ft-tip">Warm &amp; comforting · Great for congee first-timers</span>
+      </div>
+    </div>
+
+    <div class="ft-card">
+      <div class="ft-num">05</div>
+      <div class="ft-body">
+        <div class="ft-names">
+          <span class="ft-cn">油條</span>
+          <span class="ft-en">Youtiao · Fried Dough Stick</span>
+        </div>
+        <p class="ft-desc">Crispy, golden fried dough sticks — light inside, crunchy outside. Add one as a side and break it into your congee. Simple, but a must-try pairing.</p>
+        <span class="ft-tip">Best side · Pairs with congee</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
 <!-- ── NOODLE SECTION ── -->
 <section id="noodle" class="cat-section">
   <div class="cat-header">
@@ -1016,7 +1294,7 @@
       <div class="cat-rule-diamond"></div>
     </div>
     <p class="cat-desc">
-      Served in a light, clear broth with fresh egg noodles or flat rice noodles. Available in regular (小) and large (大). Most soups range from $11–$13.
+      Served in light, clear broth with fresh springy egg noodles. <abbr title="雲吞 — handmade shrimp-pork dumplings, a signature of Hong Kong noodle shops">Wonton (雲吞)</abbr> are handmade shrimp-pork dumplings. <abbr title="水餃 — larger dumplings with a mixed meat and shrimp filling">Sui-kau (水餃)</abbr> are larger dumplings with a mixed filling. Available in regular (小) and large (大). Most soups $11–$13 — see full menu for current pricing.
     </p>
   </div>
 
@@ -1029,6 +1307,7 @@
         <span class="highlight-tag">Signature</span>
         <span class="highlight-zh">雲吞麵</span>
         <span class="highlight-en">Wonton Noodle Soup</span>
+        <span class="highlight-desc">Handmade wontons · clear broth · egg noodles</span>
       </div>
     </div>
 
@@ -1039,6 +1318,7 @@
         <span class="highlight-tag">House Favourite</span>
         <span class="highlight-zh">雲吞牛腩麵</span>
         <span class="highlight-en">Wonton & Beef Brisket Noodle</span>
+        <span class="highlight-desc">Wontons with slow-braised brisket · richer broth</span>
       </div>
     </div>
 
@@ -1049,6 +1329,7 @@
         <span class="highlight-tag">Classic</span>
         <span class="highlight-zh">雲吞水餃麵</span>
         <span class="highlight-en">Wonton & Sui-kau Noodle</span>
+        <span class="highlight-desc">Two dumpling types together · egg noodles</span>
       </div>
     </div>
 
@@ -1070,7 +1351,7 @@
       <div class="cat-rule-diamond"></div>
     </div>
     <p class="cat-desc">
-      Silky smooth rice porridge, slow-cooked until the grains melt into a velvety base. A Cantonese comfort food and a staple of Hong Kong breakfast culture. Served warm.
+      <abbr title="粥 — slow-cooked rice porridge, thick and silky. A staple of Cantonese and Hong Kong breakfast culture.">Congee (粥)</abbr> is rice porridge slow-cooked until the grains dissolve into a smooth, velvety base. Mild and deeply comforting — served warm with different toppings depending on the variety. Pairs perfectly with youtiao (fried dough sticks) on the side.
     </p>
   </div>
 
@@ -1083,6 +1364,7 @@
         <span class="highlight-tag">Classic</span>
         <span class="highlight-zh">魚片豬潤粥</span>
         <span class="highlight-en">Fish &amp; Liver Congee</span>
+        <span class="highlight-desc">Sliced fish and pork liver over silky congee</span>
       </div>
     </div>
 
@@ -1093,6 +1375,7 @@
         <span class="highlight-tag">Signature</span>
         <span class="highlight-zh">荔灣艇仔粥</span>
         <span class="highlight-en">Sam-pan Congee</span>
+        <span class="highlight-desc">Seafood porridge with mixed toppings · house signature</span>
       </div>
     </div>
 
@@ -1114,7 +1397,7 @@
       <div class="cat-rule-diamond"></div>
     </div>
     <p class="cat-desc">
-      Order a side to complement your bowl. Youtiao (fried dough sticks) are especially popular dipped in congee. See the full printed menu for the complete sides list.
+      <abbr title="油條 — long crispy fried dough sticks, golden outside and light inside. The classic Hong Kong pairing with congee.">Youtiao (油條)</abbr> are long, crispy golden fried dough sticks — light inside, crunchy outside. Break one apart and dip it into warm congee for the classic pairing. We also offer seasonal greens, soy milk, and more. See the full printed menu for all sides and drinks.
     </p>
   </div>
 
@@ -1127,6 +1410,7 @@
         <span class="highlight-tag">Must Try</span>
         <span class="highlight-zh">油條</span>
         <span class="highlight-en">Fried Dough Stick</span>
+        <span class="highlight-desc">Crispy golden dough · dip into congee</span>
       </div>
     </div>
 
@@ -1137,6 +1421,7 @@
         <span class="highlight-tag">Seasonal</span>
         <span class="highlight-zh">各式小菜</span>
         <span class="highlight-en">Daily Sides</span>
+        <span class="highlight-desc">Seasonal vegetables and small dishes</span>
       </div>
     </div>
 
@@ -1147,6 +1432,7 @@
         <span class="highlight-tag">Drinks</span>
         <span class="highlight-zh">豆漿</span>
         <span class="highlight-en">Soy Milk & More</span>
+        <span class="highlight-desc">Warm soy milk and traditional beverages</span>
       </div>
     </div>
 
@@ -1174,6 +1460,24 @@
         <img src="brand_assets/DSCF0057.JPG" alt="Menu Page 2 — Congee, Sides & Drinks">
       </div>
       <p class="ref-caption">粥類 · 小菜 · 飲料 — Congee, Sides &amp; Drinks</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── VISIT CTA ── -->
+<section class="visit-cta" aria-label="Visit us">
+  <div class="visit-cta-inner">
+    <div class="visit-cta-text">
+      <h3>Ready to visit?</h3>
+      <p class="visit-cta-note">
+        <strong>Cash only · Walk-ins welcome</strong><br>
+        418 Maynard Ave S, Seattle Chinatown-ID<br>
+        Mon–Fri 10am–7pm · Sat–Sun 10am–8pm
+      </p>
+    </div>
+    <div class="visit-cta-buttons">
+      <a href="https://maps.google.com/maps?q=418+Maynard+Ave+S,+Seattle,+WA+98104" target="_blank" rel="noopener" class="btn-directions" aria-label="Get directions to Mike's Noodle House">Get Directions</a>
+      <a href="tel:+12063897099" class="btn-call" aria-label="Call Mike's Noodle House">(206) 389-7099</a>
     </div>
   </div>
 </section>
@@ -1258,6 +1562,16 @@
     opacity: 0, y: -12, duration: 0.5, ease: 'power2.out', delay: 0.6
   });
 
+  /* First time section */
+  gsap.from('#firsttime .section-eyebrow, #firsttime .section-h2, #firsttime .firsttime-sub', {
+    scrollTrigger: { trigger: '#firsttime', start: 'top 80%', once: true },
+    opacity: 0, y: 24, stagger: 0.09, duration: 0.75, ease: 'power3.out'
+  });
+  gsap.from('#firsttime .ft-card', {
+    scrollTrigger: { trigger: '#firsttime .ft-grid', start: 'top 84%', once: true },
+    opacity: 0, y: 28, stagger: 0.07, duration: 0.78, ease: 'back.out(1.1)'
+  });
+
   /* Category sections */
   ['#noodle', '#congee', '#sides'].forEach(id => {
     gsap.from(`${id} .cat-header > *`, {
@@ -1268,6 +1582,16 @@
       scrollTrigger: { trigger: `${id} .highlights-layout`, start: 'top 84%' },
       opacity: 0, y: 36, scale: 0.97, stagger: 0.12, duration: 0.9, ease: 'back.out(1.15)'
     });
+  });
+
+  /* Visit CTA */
+  gsap.from('.visit-cta .visit-cta-text h3, .visit-cta .visit-cta-note', {
+    scrollTrigger: { trigger: '.visit-cta', start: 'top 82%', once: true },
+    opacity: 0, y: 20, stagger: 0.08, duration: 0.65, ease: 'power3.out'
+  });
+  gsap.from('.visit-cta .btn-directions, .visit-cta .btn-call', {
+    scrollTrigger: { trigger: '.visit-cta', start: 'top 82%', once: true },
+    opacity: 0, y: 14, stagger: 0.1, duration: 0.55, ease: 'power2.out', delay: 0.18
   });
 
   /* Reference section */
@@ -1281,7 +1605,7 @@
   });
 
   /* Active category nav highlight on scroll */
-  const sections = ['noodle', 'congee', 'sides', 'reference'];
+  const sections = ['firsttime', 'noodle', 'congee', 'sides', 'reference'];
   sections.forEach(id => {
     ScrollTrigger.create({
       trigger: `#${id}`,
