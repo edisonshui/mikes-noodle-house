@@ -1102,6 +1102,16 @@
       background: rgba(247,235,200,0.4);
       border-radius: 50%;
     }
+
+    /* Fix: ft-grid default (repeat(2,1fr)) is declared after the @media block above,
+       so it wins the cascade on mobile. Re-declare here after it to restore 1-col. */
+    @media (max-width: 768px) {
+      .ft-grid { grid-template-columns: 1fr; gap: 10px; }
+      .ft-grid .ft-card:nth-child(5) { grid-column: auto; max-width: none; }
+      .firsttime-header { margin-bottom: 24px; }
+      .ft-tip { letter-spacing: 0.18em; }
+      .ft-desc { font-size: 12.5px; }
+    }
   </style>
 </head>
 <body>
