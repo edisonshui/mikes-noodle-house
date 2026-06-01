@@ -1568,5 +1568,104 @@ document.querySelectorAll('.value-item').forEach(item => {
 </script>
 
 
+<!-- ── MOBILE STICKY ACTION BAR ── -->
+<style>
+  .mob-bar {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 990;
+    background: #F5EACC;
+    border-top: 3px solid #C12518;
+    box-shadow: 0 -2px 12px rgba(28,14,7,0.10), 0 -6px 32px rgba(28,14,7,0.08);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  .mob-bar-inner {
+    display: flex;
+    align-items: stretch;
+    height: 64px;
+  }
+  .mob-bar-btn {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    text-decoration: none;
+    color: #1C0E07;
+    padding: 10px 6px 12px;
+    position: relative;
+    -webkit-tap-highlight-color: transparent;
+    transition: background 0.18s ease;
+  }
+  .mob-bar-btn:hover { background: rgba(193,37,24,0.05); }
+  .mob-bar-btn:active { background: rgba(193,37,24,0.10); transform: scale(0.96); transition: transform 0.08s ease, background 0.08s ease; }
+  .mob-bar-btn:focus-visible { outline: 2px solid #C12518; outline-offset: -2px; border-radius: 2px; }
+  .mob-bar-btn--call { color: #C12518; }
+  .mob-bar-icon { width: 20px; height: 20px; flex-shrink: 0; display: block; }
+  .mob-bar-cn {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.10em;
+    line-height: 1;
+    color: inherit;
+  }
+  .mob-bar-en {
+    font-family: 'Noto Sans SC', sans-serif;
+    font-size: 7.5px;
+    font-weight: 400;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    line-height: 1;
+    color: #7A5030;
+  }
+  .mob-bar-btn--call .mob-bar-en { color: #A41E14; }
+  .mob-bar-sep {
+    width: 1px;
+    background: rgba(180,130,40,0.30);
+    align-self: stretch;
+    margin: 14px 0;
+    flex-shrink: 0;
+  }
+  @media (max-width: 768px) {
+    .mob-bar { display: block; }
+    .footer { padding-bottom: 88px !important; }
+  }
+  @media (min-width: 769px) {
+    .mob-bar { display: none !important; }
+  }
+</style>
+<nav class="mob-bar" aria-label="Quick actions">
+  <div class="mob-bar-inner">
+    <a href="menu.html" class="mob-bar-btn" aria-label="View menu">
+      <svg class="mob-bar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+        <line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/>
+      </svg>
+      <span class="mob-bar-cn">菜單</span>
+      <span class="mob-bar-en">Menu</span>
+    </a>
+    <div class="mob-bar-sep" aria-hidden="true"></div>
+    <a href="https://maps.google.com/maps?q=418+Maynard+Ave+S,+Seattle,+WA+98104" class="mob-bar-btn" target="_blank" rel="noopener" aria-label="Get directions to Mike's Noodle House">
+      <svg class="mob-bar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M12 2a7 7 0 0 1 7 7c0 5.25-7 13-7 13S5 14.25 5 9a7 7 0 0 1 7-7z"/><circle cx="12" cy="9" r="2.5"/>
+      </svg>
+      <span class="mob-bar-cn">地圖</span>
+      <span class="mob-bar-en">Directions</span>
+    </a>
+    <div class="mob-bar-sep" aria-hidden="true"></div>
+    <a href="tel:+12063897099" class="mob-bar-btn mob-bar-btn--call" aria-label="Call (206) 389-7099">
+      <svg class="mob-bar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.27-.27.67-.36 1-.24 1.1.4 2.3.6 3.6.6.55 0 1 .45 1 1V20c0 .55-.45 1-1 1C10.85 21 3 13.15 3 4c0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.24 1.01L6.6 10.8z"/>
+      </svg>
+      <span class="mob-bar-cn">電話</span>
+      <span class="mob-bar-en">Call</span>
+    </a>
+  </div>
+</nav>
+
 </body>
 </html>
